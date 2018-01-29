@@ -3,9 +3,9 @@
     <color name="colorPrimary">#C62828</color>
     <color name="colorPrimaryDark">#9b2020</color>
     <color name="colorAccent">#FFEB3B</color>
-    <color name="soce">#0895ed</color>
-    <color name="soe">#ed5108</color>
-    <color name="sol">#32ed08</color>
-    <color name="sob">#5808ed</color>
-    <color name="sod">#ed0813</color>
+    <color name="soce">#54b2ec</color>
+    <color name="soe">#e47937</color>
+    <color name="sol">#4dcc30</color>
+    <color name="sob">#825bca</color>
+    <color name="sod">#e7353d</color>
 </resources>
