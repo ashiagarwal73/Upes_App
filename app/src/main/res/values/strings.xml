@@ -5,4 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+        <string name="soce">School of\nComputer Science</string>
+        <string name="soe">School of\nEngineering</string>
+        <string name="sob">School of\nBuisness</string>
+        <string name="sol">School of\nLaw</string>
+        <string name="sod">School of\nDesigning</string>
 </resources>
