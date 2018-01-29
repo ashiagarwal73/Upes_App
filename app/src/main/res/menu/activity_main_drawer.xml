@@ -31,5 +31,8 @@
         <item
             android:id="@+id/webminars"
             android:title="Webminars" />
+        <item
+            android:id="@+id/calender"
+            android:title="Calender View" />
     </group>
 </menu>
