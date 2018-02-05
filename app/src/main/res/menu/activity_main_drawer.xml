@@ -5,34 +5,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/technical"
-            android:title="Technical" />
+            android:id="@+id/socs"
+            android:title="School of Computer Science"
+            />
         <item
-            android:id="@+id/nontechnical"
-            android:title="Non Technical" />
+            android:id="@+id/soe"
+            android:title="School of Engineering">
+        </item>
         <item
-            android:id="@+id/society"
-            android:title="Society" />
+            android:id="@+id/sob"
+            android:title="School of Busines" />
         <item
-            android:id="@+id/workshops"
-            android:title="Workshops" />
+            android:id="@+id/sod"
+            android:title="School of Design" />
         <item
-            android:id="@+id/seminars"
-            android:title="Seminars" />
-        <item
-            android:id="@+id/competitions"
-            android:title="Competitions" />
-        <item
-            android:id="@+id/cultural"
-            android:title="Cultural" />
-        <item
-            android:id="@+id/sports"
-            android:title="Sports" />
-        <item
-            android:id="@+id/webminars"
-            android:title="Webminars" />
-        <item
-            android:id="@+id/calender"
-            android:title="Calender View" />
+            android:id="@+id/sol"
+            android:title="School of Law" />
     </group>
 </menu>

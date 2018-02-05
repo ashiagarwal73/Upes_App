@@ -36,6 +36,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 5:
                 Design design5=new Design();
                 return  design5;
+            case 6:
+                Design design6=new Design();
+                return design6;
             default:
                 return null;
         }
@@ -51,6 +54,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         return tabText[position];
     }
-    String[] tabText = new String[]{"School of Computer Science","School of Engineering","School of Design","School of Law","School of Business"};
+    //String[] tabText = new String[]{"School of Computer Science","School of Engineering","School of Design","School of Law","School of Business"};
     //String[] tabText = new String[]{"SOCS","SOE","SOD","SOL","SOB"};
+    String[] tabText=new String[]{"Workshops","Seminars","Competitions","Cultural","Sports","Webminars"};
 }

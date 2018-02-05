@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -34,11 +35,12 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setElevation(0);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout.addTab(tabLayout.newTab().setText("School of Computer Science"));
-        tabLayout.addTab(tabLayout.newTab().setText("School of Engineering"));
-        tabLayout.addTab(tabLayout.newTab().setText("School of Design"));
-        tabLayout.addTab(tabLayout.newTab().setText("School of Law"));
-        tabLayout.addTab(tabLayout.newTab().setText("School of Business"));
+        tabLayout.addTab(tabLayout.newTab().setText("Workshops"));
+        tabLayout.addTab(tabLayout.newTab().setText("Seminars"));
+        tabLayout.addTab(tabLayout.newTab().setText("Competitions"));
+        tabLayout.addTab(tabLayout.newTab().setText("Cultural"));
+        tabLayout.addTab(tabLayout.newTab().setText("Sports"));
+        tabLayout.addTab(tabLayout.newTab().setText("Webminars"));
         PagerAdapter pagerAdapter=new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -99,23 +101,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.technical) {
+        if (id == R.id.socs) {
+
             // Handle the camera action
-        } else if (id == R.id.nontechnical) {
+        } else if (id == R.id.soe) {
 
-        } else if (id == R.id.society) {
+        } else if (id == R.id.sob) {
 
-        } else if (id == R.id.workshops) {
+        } else if (id == R.id.sod) {
 
-        } else if (id == R.id.seminars) {
-
-        } else if (id == R.id.competitions) {
-
-        } else if (id == R.id.cultural) {
-
-        } else if (id == R.id.sports) {
-
-        } else if (id == R.id.webminars) {
+        } else if (id == R.id.sol) {
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

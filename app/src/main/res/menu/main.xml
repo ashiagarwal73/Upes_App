@@ -6,4 +6,9 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_calenderview"
+        android:orderInCategory="100"
+        android:title="Calender View"
+        app:showAsAction="never" />
 </menu>
