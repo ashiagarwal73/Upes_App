@@ -2,12 +2,15 @@ package com.agarwal.ashi.upes_app;
 
 import android.content.ClipData;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -102,16 +105,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.socs) {
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soce)));
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.soce));
 
             // Handle the camera action
         } else if (id == R.id.soe) {
-
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soe)));
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.soe));
         } else if (id == R.id.sob) {
-
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sob)));
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.sob));
         } else if (id == R.id.sod) {
-
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sod)));
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.sod));
         } else if (id == R.id.sol) {
-
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sol)));
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.sol));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
