@@ -3,9 +3,14 @@
     <color name="colorPrimary">#C62828</color>
     <color name="colorPrimaryDark">#9b2020</color>
     <color name="colorAccent">#FFEB3B</color>
-    <color name="soce">#54b2ec</color>
-    <color name="soe">#e47937</color>
-    <color name="sol">#4dcc30</color>
-    <color name="sob">#825bca</color>
-    <color name="sod">#e7353d</color>
+    <color name="soce">#025289</color>
+    <color name="soe">#199ad5</color>
+    <color name="sol">#f89e2a</color>
+    <color name="sob">#02a951</color>
+    <color name="sod">#e32727</color>
+    <color name="soce_dark">#033456</color>
+    <color name="soe_dark">#127fb1</color>
+    <color name="sol_dark">#d17d0f</color>
+    <color name="sob_dark">#04803e</color>
+    <color name="sod_dark">#860d0d</color>
 </resources>

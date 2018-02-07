@@ -5,21 +5,31 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/home"
+            android:title="Home"
+            android:icon="@drawable/ic_home_black_24dp"
+            />
+        <item
             android:id="@+id/socs"
             android:title="School of Computer Science"
+            android:icon="@drawable/ic_school_black_24dp"
             />
         <item
             android:id="@+id/soe"
-            android:title="School of Engineering">
+            android:title="School of Engineering"
+            android:icon="@drawable/ic_school_black_24dp">
         </item>
         <item
             android:id="@+id/sob"
-            android:title="School of Busines" />
+            android:title="School of Busines"
+            android:icon="@drawable/ic_school_black_24dp"/>
         <item
             android:id="@+id/sod"
-            android:title="School of Design" />
+            android:title="School of Design"
+            android:icon="@drawable/ic_school_black_24dp"/>
         <item
             android:id="@+id/sol"
-            android:title="School of Law" />
+            android:title="School of Law"
+            android:icon="@drawable/ic_school_black_24dp"/>
     </group>
 </menu>
