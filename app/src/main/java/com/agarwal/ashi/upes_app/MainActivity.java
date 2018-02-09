@@ -1,17 +1,17 @@
 package com.agarwal.ashi.upes_app;
 
 import android.content.ClipData;
-import android.content.ContentUris;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -25,6 +25,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     TabLayout tabLayout;
     ViewPager viewPager;
+    Window window;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setElevation(2);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout.addTab(tabLayout.newTab().setText("Workshops"));
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity
         tabLayout.addTab(tabLayout.newTab().setText("Cultural"));
         tabLayout.addTab(tabLayout.newTab().setText("Sports"));
         tabLayout.addTab(tabLayout.newTab().setText("Webminars"));
+        window=getWindow();
         PagerAdapter pagerAdapter=new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -59,7 +62,8 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
+        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_date_range_black_24dp);
+        toolbar.setOverflowIcon(drawable);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -92,43 +96,49 @@ public class MainActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        switch(item.getItemId()) {
-            case R.id.action_settings     : return true;
-            case R.id.action_calenderview : //create an intent for the google calender app
-                Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
-                builder.appendPath("time");
-                ContentUris.appendId(builder, 5000);
-                Intent intent = new Intent(Intent.ACTION_VIEW)
-                        .setData(builder.build());
-                startActivity(intent);
-                                            return true;
-            default : return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_calenderview) {
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.socs) {
+        if (id==R.id.home)
+        {
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+            tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+        else if (id == R.id.socs) {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soce)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.soce));
-
+            window.setStatusBarColor(getResources().getColor(R.color.soce_dark));
             // Handle the camera action
         } else if (id == R.id.soe) {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soe)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.soe));
+            window.setStatusBarColor(getResources().getColor(R.color.soe_dark));
         } else if (id == R.id.sob) {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sob)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sob));
+            window.setStatusBarColor(getResources().getColor(R.color.sob_dark));
         } else if (id == R.id.sod) {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sod)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sod));
+            window.setStatusBarColor(getResources().getColor(R.color.sod_dark));
         } else if (id == R.id.sol) {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sol)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sol));
+            window.setStatusBarColor(getResources().getColor(R.color.sol_dark));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
