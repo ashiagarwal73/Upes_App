@@ -1,6 +1,8 @@
 package com.agarwal.ashi.upes_app;
 
 import android.content.ClipData;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -33,17 +35,21 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     TabLayout tabLayout;
     ViewPager viewPager;
+    PagerAdapter pagerAdapter;
+    FloatingActionButton fab;
+    DrawerLayout drawer;
     Window window;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        /* Setting the the action bar */
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(2);
+
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout.addTab(tabLayout.newTab().setText("Workshops"));
         tabLayout.addTab(tabLayout.newTab().setText("Seminars"));
         tabLayout.addTab(tabLayout.newTab().setText("Competitions"));
@@ -51,10 +57,18 @@ public class MainActivity extends AppCompatActivity
         tabLayout.addTab(tabLayout.newTab().setText("Sports"));
         tabLayout.addTab(tabLayout.newTab().setText("Webminars"));
         window=getWindow();
-        PagerAdapter pagerAdapter=new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+
+        /*retrieving an instance of ViewPager */
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        pagerAdapter=new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
+
+        /* setting the tab layout with the view pager */
         tabLayout.setupWithViewPager(viewPager);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,16 +76,29 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+
+
+
+        /*Setting the overflow icon as calender icon */
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_date_range_black_24dp);
         toolbar.setOverflowIcon(drawable);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //setting the listener for navigation view
         navigationView.setNavigationItemSelectedListener(this);
+
+        /* Setting the default layout colour based on the user choice in the
+           SchoolSelectActivity
+         */
+        SharedPreferences spref=getSharedPreferences("com.agarwal.ashi.upes_app.choice",Context.MODE_PRIVATE);
+        String choice=spref.getString("choice",null);
+        System.out.println(choice);
+        setUILayout(choice);
     }
 
     @Override
@@ -111,37 +138,82 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        if (id==R.id.home)
-        {
-            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
-            tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-        }
-        else if (id == R.id.socs) {
-            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soce)));
-            tabLayout.setBackgroundColor(getResources().getColor(R.color.soce));
-            window.setStatusBarColor(getResources().getColor(R.color.soce_dark));
-            // Handle the camera action
-        } else if (id == R.id.soe) {
-            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soe)));
-            tabLayout.setBackgroundColor(getResources().getColor(R.color.soe));
-            window.setStatusBarColor(getResources().getColor(R.color.soe_dark));
-        } else if (id == R.id.sob) {
-            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sob)));
-            tabLayout.setBackgroundColor(getResources().getColor(R.color.sob));
-            window.setStatusBarColor(getResources().getColor(R.color.sob_dark));
-        } else if (id == R.id.sod) {
-            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sod)));
-            tabLayout.setBackgroundColor(getResources().getColor(R.color.sod));
-            window.setStatusBarColor(getResources().getColor(R.color.sod_dark));
-        } else if (id == R.id.sol) {
-            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sol)));
-            tabLayout.setBackgroundColor(getResources().getColor(R.color.sol));
-            window.setStatusBarColor(getResources().getColor(R.color.sol_dark));
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        setUILayout(item.getItemId());
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setUILayout(String desc) {
+        switch(desc) {
+            case "home" :
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+                tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+                break;
+
+            case "socs" :
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soce)));
+                tabLayout.setBackgroundColor(getResources().getColor(R.color.soce));
+                window.setStatusBarColor(getResources().getColor(R.color.soce_dark));
+                break;
+
+            case "soe" :
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soe)));
+                tabLayout.setBackgroundColor(getResources().getColor(R.color.soe));
+                window.setStatusBarColor(getResources().getColor(R.color.soe_dark));
+                break;
+
+            case "sob" :
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sob)));
+                tabLayout.setBackgroundColor(getResources().getColor(R.color.sob));
+                window.setStatusBarColor(getResources().getColor(R.color.sob_dark));
+                break;
+
+            case "sod" :
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sod)));
+                tabLayout.setBackgroundColor(getResources().getColor(R.color.sod));
+                window.setStatusBarColor(getResources().getColor(R.color.sod_dark));
+                break;
+
+            case "sol" :
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sol)));
+                tabLayout.setBackgroundColor(getResources().getColor(R.color.sol));
+                window.setStatusBarColor(getResources().getColor(R.color.sol_dark));
+                break;
+
+            default :
+                break;
+        }
+    }
+
+    private void setUILayout(int menuId) {
+        switch(menuId) {
+            case R.id.home :
+                setUILayout("home");
+                break;
+
+            case R.id.socs :
+                setUILayout("socs");
+                break;
+
+            case R.id.soe :
+                setUILayout("soe");
+                break;
+
+            case R.id.sob :
+                setUILayout("sob");
+                break;
+
+            case R.id.sod :
+                setUILayout("sod");
+                break;
+
+            case R.id.sol :
+                setUILayout("sol");
+                break;
+
+            default :
+                break;
+        }
     }
 }
