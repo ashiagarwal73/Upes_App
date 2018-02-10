@@ -27,7 +27,5 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme">
         </activity>
-
     </application>
-
 </manifest>

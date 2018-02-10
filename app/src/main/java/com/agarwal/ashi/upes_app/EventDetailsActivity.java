@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -16,6 +17,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     private static final String TAG = "DemoActivity";
     Thread myThread;
     ImageView imageView;
+    Window window;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,9 +74,5 @@ public class EventDetailsActivity extends AppCompatActivity {
         myThread.start();
         mLayout.setAnchorPoint(.6f);
         mLayout.setPanelHeight(70);
-    }
-    public boolean onSupportNavigateUp() {
-        this.finish();
-        return true;
     }
 }
