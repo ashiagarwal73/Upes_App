@@ -13,11 +13,12 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class EventsFragment extends Fragment {
-    Bundle args;
+    private int layoutColorId;
     ListView lV;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        args=getArguments();
+        Bundle args=getArguments();
+        layoutColorId=args.getInt("layoutColorId");
         lV=(ListView)inflater.inflate(R.layout.fragment_design,container,false);
         ArrayList<Event> eventsList=new ArrayList<Event>();
         eventsList.add(new Event("Capture The Flag"));
@@ -32,7 +33,9 @@ public class EventsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 System.out.println("onItemClickListener");
-                getActivity().startActivity(new Intent(getActivity(),EventDetailsActivity.class));
+                Intent intent=new Intent(getActivity(),EventDetailsActivity.class);
+                intent.putExtra("actionbarColorId",layoutColorId);
+                getActivity().startActivity(intent);
             }
         });
         return lV;

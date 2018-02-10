@@ -1,45 +1,46 @@
 package com.agarwal.ashi.upes_app;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int tabCount;
-    public PagerAdapter(FragmentManager fm, int tabCount) {
+    private int layoutColorId;
+    public PagerAdapter(FragmentManager fm, int tabCount,int layoutColorId) {
         super(fm);
         this.tabCount = tabCount;
+        this.layoutColorId=layoutColorId;
     }
 
     @Override
     public Fragment getItem(int position) {
+        EventsFragment eventsFragment=new EventsFragment();
+        Bundle args=new Bundle();
+        args.putInt("layoutColorId",layoutColorId);
+        eventsFragment.setArguments(args);
         switch (position){
-            case 0:
-                  EventsFragment eventsFragment =new EventsFragment();
-                  //add the intitializer arguments for the fragments here
-                  return eventsFragment;
-//                EventsFragment eventsFragment = new EventsFragment();
-//                return eventsFragment;
+            case 0 :
+                //add the intitializer arguments for the fragments here
+                //by args.___________ methods
+                return eventsFragment;
+//              EventsFragment eventsFragment = new EventsFragment();
+//              return eventsFragment;
             case 1:
-                  EventsFragment eventsFragment1 =new EventsFragment();
-                  return eventsFragment1;
+                return eventsFragment;
 //                SocietyFragment societyFragment = new SocietyFragment();
 //                return societyFragment;
             case 2:
-                EventsFragment eventsFragment2 =new EventsFragment();
-                return eventsFragment2;
+                return eventsFragment;
             case 3:
-                EventsFragment eventsFragment3 =new EventsFragment();
-                return eventsFragment3;
+                return eventsFragment;
             case 4:
-                EventsFragment eventsFragment4 =new EventsFragment();
-                return eventsFragment4;
-            case 5:
-                EventsFragment eventsFragment5 =new EventsFragment();
-                return eventsFragment5;
+                return eventsFragment;
+            case 5:;
+                return eventsFragment;
             case 6:
-                EventsFragment eventsFragment6 =new EventsFragment();
-                return eventsFragment6;
+                return eventsFragment;
             default:
                 return null;
         }
