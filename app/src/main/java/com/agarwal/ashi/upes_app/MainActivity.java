@@ -2,6 +2,7 @@ package com.agarwal.ashi.upes_app;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -124,6 +125,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_calenderview) {
+            Intent intent=new Intent(MainActivity.this,CalenderView.class);
+            startActivity(intent);
             return true;
         }
 
