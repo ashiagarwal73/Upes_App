@@ -25,7 +25,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
         Button clickedB=(Button)view;
         switch(clickedB.getId()) {
             case  R.id.soce :
-                choice="soce";
+                choice="socs";
                 break;
             case R.id.soe :
                 choice="soe";

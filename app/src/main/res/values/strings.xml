@@ -13,4 +13,6 @@
     <string name="sob">School of\nBuisness</string>
     <string name="sol">School of\nLaw</string>
     <string name="sod">School of\nDesigning</string>
+    <string name="register">Register</string>
+    <string name="contact">Contact</string>
 </resources>
