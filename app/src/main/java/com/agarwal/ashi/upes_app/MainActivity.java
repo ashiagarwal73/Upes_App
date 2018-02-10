@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     TabLayout tabLayout;
     ViewPager viewPager;
-    PagerAdapter pagerAdapter;
     FloatingActionButton fab;
     DrawerLayout drawer;
     Window window;
@@ -60,8 +59,6 @@ public class MainActivity extends AppCompatActivity
 
         /*retrieving an instance of ViewPager */
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        pagerAdapter=new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
-        viewPager.setAdapter(pagerAdapter);
 
         /* setting the tab layout with the view pager */
         tabLayout.setupWithViewPager(viewPager);
@@ -149,36 +146,54 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
                 tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                                     R.color.colorPrimary));
+                System.out.println(R.color.colorPrimary);
                 break;
 
             case "socs" :
-                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soce)));
-                tabLayout.setBackgroundColor(getResources().getColor(R.color.soce));
+                getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.socs)));
+                tabLayout.setBackgroundColor(getResources().getColor(R.color.socs));
                 window.setStatusBarColor(getResources().getColor(R.color.soce_dark));
+                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                        R.color.socs));
+                System.out.println(R.color.socs);
                 break;
 
             case "soe" :
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soe)));
                 tabLayout.setBackgroundColor(getResources().getColor(R.color.soe));
                 window.setStatusBarColor(getResources().getColor(R.color.soe_dark));
+                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                        R.color.soe));
+                System.out.println(R.color.soe);
                 break;
 
             case "sob" :
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sob)));
                 tabLayout.setBackgroundColor(getResources().getColor(R.color.sob));
                 window.setStatusBarColor(getResources().getColor(R.color.sob_dark));
+                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                        R.color.sob));
+                System.out.println(R.color.sob);
                 break;
 
             case "sod" :
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sod)));
                 tabLayout.setBackgroundColor(getResources().getColor(R.color.sod));
                 window.setStatusBarColor(getResources().getColor(R.color.sod_dark));
+                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                        R.color.sod));
+                System.out.println(R.color.sod);
                 break;
 
             case "sol" :
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sol)));
                 tabLayout.setBackgroundColor(getResources().getColor(R.color.sol));
                 window.setStatusBarColor(getResources().getColor(R.color.sol_dark));
+                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                        R.color.sol));
+                System.out.println(R.color.sol);
                 break;
 
             default :
