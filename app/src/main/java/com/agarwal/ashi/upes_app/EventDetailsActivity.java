@@ -18,6 +18,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     Thread myThread;
     ImageView imageView;
     Window window;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
