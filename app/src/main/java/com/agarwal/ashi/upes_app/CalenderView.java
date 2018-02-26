@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class CalenderView extends AppCompatActivity {
     TextView textView,textView2;
@@ -27,10 +26,9 @@ public class CalenderView extends AppCompatActivity {
                 else {
                     textView.setVisibility(View.INVISIBLE);
                     textView2.setVisibility(View.INVISIBLE);
-
                 }
                 //Toast.makeText(CalenderView.this, ""+dayOfMonth+" "+month+" "+year, Toast.LENGTH_SHORT).show();
             }
         });
     }
-}
+   }

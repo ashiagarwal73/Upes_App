@@ -54,7 +54,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
             }
         });
-        myThread = new Thread()
+        /*myThread = new Thread()
         {
             @Override
             public void run()
@@ -71,9 +71,9 @@ public class EventDetailsActivity extends AppCompatActivity {
                 }
 
             }
-        };
-        myThread.start();
+        };*/
+//        myThread.start();
         mLayout.setAnchorPoint(.6f);
-        mLayout.setPanelHeight(70);
+        mLayout.setPanelHeight(100);
     }
 }

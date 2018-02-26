@@ -15,7 +15,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500dp"
         app:srcCompat="@drawable/captflag" />
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,10 +29,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="6dp"
+
             android:text="Slide Up to view more details "
             android:textAlignment="center"
             android:textColor="#000"
-            android:textSize="8sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
             <TextView
                 android:id="@+id/textView3"
