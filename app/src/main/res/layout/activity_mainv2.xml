@@ -16,15 +16,15 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintlayout"
-        android:layout_width="320dp"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start">
+        android:layout_gravity="start"
+        android:background="@android:color/white">
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:background="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/expandableListView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,11 @@
             android:id="@+id/expandableListView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="24dp"
             android:background="@android:color/white"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10dp"
+            android:groupIndicator="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

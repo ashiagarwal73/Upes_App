@@ -35,8 +35,11 @@ public class NavigationMenuAdapter extends BaseExpandableListAdapter {
     public int getChildrenCount(int groupPosition) {
         if(groupPosition==0) // Home
             return 0;
-        else
-            return schools.get(groupPosition).size();
+        else {
+            int size = schools.get(groupPosition).size();
+            System.out.println("getChildrenCount : "+size);
+            return size;
+        }
     }
 
     @Override
@@ -74,37 +77,45 @@ public class NavigationMenuAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean b, View convertView, ViewGroup viewGroup) {
-        LinearLayout groupHeader;
+        ConstraintLayout groupHeader;
         TextView tV;
+        ImageView iV;
+        ImageView arrow;
         if(convertView==null) {
-            groupHeader=(LinearLayout)LayoutInflater.from(context).inflate(R.layout.nav_menu_group_header,null);
+            groupHeader=(ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.nav_menu_group_header,null);
         }
         else {
-            groupHeader=(LinearLayout)convertView;
+            groupHeader=(ConstraintLayout) convertView;
         }
-        tV=(TextView)((ViewGroup)groupHeader.getChildAt(0)).getChildAt(0);
+        iV=(ImageView)groupHeader.getChildAt(0);
+        tV=(TextView)groupHeader.getChildAt(1);
         tV.setText(menuNames.get(groupPosition));
-
+        if(groupPosition==0)
+            iV.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_home_black_24dp,null));
+        else
+            iV.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_school_black_24dp));
+        arrow = (ImageView) groupHeader.getChildAt(2);
+        if(getChildrenCount(groupPosition)!=0) {
+            arrow.setVisibility(View.VISIBLE);
+        }
+        else { // required because the view object received could be a recycled one
+            arrow.setVisibility(View.INVISIBLE);
+        }
         return groupHeader;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean b, View convertView, ViewGroup viewGroup) {
-        LinearLayout groupItem;
-        ConstraintLayout innerContainer;
+        ConstraintLayout groupItem;
         TextView tV;
-        ImageView imageView;
         if(convertView==null) {
-            groupItem=(LinearLayout)LayoutInflater.from(context).inflate(R.layout.nav_menu_group_item,null);
+            groupItem=(ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.nav_menu_group_item,null);
         }
         else {
-            groupItem=(LinearLayout)convertView;
+            groupItem=(ConstraintLayout) convertView;
         }
-        innerContainer=(ConstraintLayout)groupItem.getChildAt(0);
-        imageView=(ImageView)innerContainer.getChildAt(0);
-        tV=(TextView)innerContainer.getChildAt(1);
+        tV=(TextView)groupItem.getChildAt(0);
         tV.setText(schools.get(groupPosition).get(childPosition));
-
         return groupItem;
     }
 

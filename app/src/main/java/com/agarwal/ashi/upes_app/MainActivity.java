@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -59,14 +60,19 @@ public class MainActivity extends AppCompatActivity
         ArrayList<ArrayList<String>> schools=new ArrayList();
         ArrayList<String> home=new ArrayList<>();
         ArrayList<String> school1=new ArrayList<>();
+        ArrayList<String> school2=new ArrayList<>();
+        ArrayList<String> school3=new ArrayList<>();
+        ArrayList<String> school4=new ArrayList<>();
+        ArrayList<String> school5=new ArrayList<>();
         school1.add("ACM");
         school1.add("CSI");
+        school2.add("SPE");
         schools.add(home);
         schools.add(school1);
-        schools.add(new ArrayList<String>());
-        schools.add(new ArrayList<String>());
-        schools.add(new ArrayList<String>());
-        schools.add(new ArrayList<String>());
+        schools.add(school2);
+        schools.add(school3);
+        schools.add(school4);
+        schools.add(school5);
         NavigationMenuAdapter navMenuAdapter=new NavigationMenuAdapter(this,menuNames,schools);
         ExpandableListView elv=(ExpandableListView)findViewById(R.id.expandableListView);
         elv.setAdapter(navMenuAdapter);
@@ -165,7 +171,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
         // Handle navigation view item clicks here.
         setUILayout(id);
-        //drawer.closeDrawer(GravityCompat.START);
+        parent.setSelectedGroup(groupPosition);
         return false; //click was not completely handled;
     }
 
