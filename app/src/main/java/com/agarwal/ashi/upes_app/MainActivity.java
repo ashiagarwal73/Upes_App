@@ -32,6 +32,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-        // Handle navigation view item clicks here.
+        // Handle ExpandableListView item click events here
         setUILayout(id);
         parent.setSelectedGroup(groupPosition);
         return false; //click was not completely handled;
