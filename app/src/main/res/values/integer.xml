@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="home">0</integer>
+    <integer name="socs">1</integer>
+    <integer name="soe">2</integer>
+    <integer name="sob">3</integer>
+    <integer name="sol">4</integer>
+    <integer name="sod">5</integer>
+</resources>

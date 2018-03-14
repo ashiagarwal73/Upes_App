@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -29,10 +30,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements ExpandableListView.OnGroupClickListener {
     NavigationView navigationView;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -42,8 +48,36 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_mainv2);
+//*******************************************************************************Test*****************************************
+        ArrayList<String> menuNames=new ArrayList<>();
+        menuNames.add("Home");
+        menuNames.add("School of Computer Science");
+        menuNames.add("School of Engineering");
+        menuNames.add("School of Buisness");
+        menuNames.add("School of Law");
+        menuNames.add("School of Design");
+        ArrayList<ArrayList<String>> schools=new ArrayList();
+        ArrayList<String> home=new ArrayList<>();
+        ArrayList<String> school1=new ArrayList<>();
+        ArrayList<String> school2=new ArrayList<>();
+        ArrayList<String> school3=new ArrayList<>();
+        ArrayList<String> school4=new ArrayList<>();
+        ArrayList<String> school5=new ArrayList<>();
+        school1.add("ACM");
+        school1.add("CSI");
+        school2.add("SPE");
+        schools.add(home);
+        schools.add(school1);
+        schools.add(school2);
+        schools.add(school3);
+        schools.add(school4);
+        schools.add(school5);
+        NavigationMenuAdapter navMenuAdapter=new NavigationMenuAdapter(this,menuNames,schools);
+        ExpandableListView elv=(ExpandableListView)findViewById(R.id.expandableListView);
+        elv.setAdapter(navMenuAdapter);
+        elv.setOnGroupClickListener(this);
+//**************************************************************************Test******************************************
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         /* Setting the the action bar */
         setSupportActionBar(toolbar);
@@ -86,9 +120,9 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+   //     navigationView = (NavigationView) findViewById(R.id.nav_view);
         //setting the listener for navigation view
-        navigationView.setNavigationItemSelectedListener(this);
+    //    navigationView.setNavigationItemSelectedListener(this);
 
         /* Setting the default layout colour based on the user choice in the
            SchoolSelectActivity
@@ -133,14 +167,12 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
         // Handle navigation view item clicks here.
-        setUILayout(item.getItemId());
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        setUILayout(id);
+        parent.setSelectedGroup(groupPosition);
+        return false; //click was not completely handled;
     }
 
     private void setUILayout(String desc) {
@@ -204,34 +236,18 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void setUILayout(int menuId) {
-        switch(menuId) {
-            case R.id.home :
+    private void setUILayout(long id) {
+        if(id==getResources().getInteger(R.integer.home))
                 setUILayout("home");
-                break;
-
-            case R.id.socs :
+        else if(id==getResources().getInteger(R.integer.socs))
                 setUILayout("socs");
-                break;
-
-            case R.id.soe :
+        else if(id==getResources().getInteger(R.integer.soe))
                 setUILayout("soe");
-                break;
-
-            case R.id.sob :
+        else if(id==getResources().getInteger(R.integer.sob))
                 setUILayout("sob");
-                break;
-
-            case R.id.sod :
+        else if(id==getResources().getInteger(R.integer.sol))
                 setUILayout("sod");
-                break;
-
-            case R.id.sol :
+        else if(id==getResources().getInteger(R.integer.sod))
                 setUILayout("sol");
-                break;
-
-            default :
-                break;
-        }
     }
 }

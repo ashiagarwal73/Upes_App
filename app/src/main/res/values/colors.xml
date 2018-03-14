@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#C62828</color>
+    <color name="colorPrimary">#c62828</color>
     <color name="colorPrimaryDark">#9b2020</color>
     <color name="colorAccent">#FFEB3B</color>
     <color name="socs">#025289</color>
@@ -13,4 +13,5 @@
     <color name="sol_dark">#d17d0f</color>
     <color name="sob_dark">#04803e</color>
     <color name="sod_dark">#860d0d</color>
+    <color name="highlight_color">#f70404</color>
 </resources>
