@@ -35,6 +35,7 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
+import java.security.acl.Group;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -77,6 +78,11 @@ public class MainActivity extends AppCompatActivity
         ExpandableListView elv=(ExpandableListView)findViewById(R.id.expandableListView);
         elv.setAdapter(navMenuAdapter);
         elv.setOnGroupClickListener(this);
+        if(elv.getSelectedView()!=null)
+        {
+            elv.getSelectedView().setBackgroundColor(Color.RED);
+        }
+
 //**************************************************************************Test******************************************
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         /* Setting the the action bar */
