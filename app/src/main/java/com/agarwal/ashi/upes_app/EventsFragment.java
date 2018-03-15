@@ -20,13 +20,8 @@ public class EventsFragment extends Fragment {
         Bundle args=getArguments();
         layoutColorId=args.getInt("layoutColorId");
         lV=(ListView)inflater.inflate(R.layout.fragment_design,container,false);
-        ArrayList<Event> eventsList=new ArrayList<Event>();
-        eventsList.add(new Event("Capture The Flag"));
-        eventsList.add(new Event("Capture The Flag"));
-        eventsList.add(new Event("Capture The Flag"));
-        eventsList.add(new Event("Capture The Flag"));
-        eventsList.add(new Event("Capture The Flag"));
-        eventsList.add(new Event("Capture The Flag"));
+        ArrayList<EventsInformation> eventsList=new ArrayList<EventsInformation>();
+        //add events here
         lV.setAdapter(new EventsAdapter(eventsList,inflater));
         System.out.println("Setting on item click listener");
         lV.setOnItemClickListener(new AdapterView.OnItemClickListener() {

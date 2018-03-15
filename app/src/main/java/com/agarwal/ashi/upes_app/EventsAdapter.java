@@ -15,9 +15,9 @@ import java.util.List;
  */
 
 public class EventsAdapter extends BaseAdapter {
-    List<Event> eventsList;
+    List<EventsInformation> eventsList;
     LayoutInflater inflater;
-    EventsAdapter(List<Event> eventList,LayoutInflater inflater) {
+    EventsAdapter(List<EventsInformation> eventList,LayoutInflater inflater) {
         this.inflater=inflater;
         this.eventsList=eventList;
     }
@@ -40,7 +40,7 @@ public class EventsAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View layout=inflater.inflate(R.layout.event_layout,null);
         TextView titleView=(TextView)layout.findViewById(R.id.title);
-        titleView.setText(eventsList.get(i).name);
+        titleView.setText(eventsList.get(i).eventName);
         return layout;
     }
 }

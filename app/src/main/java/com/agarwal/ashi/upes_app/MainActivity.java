@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -19,6 +20,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -35,56 +38,123 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.lang.reflect.Array;
-import java.security.acl.Group;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class MainActivity extends AppCompatActivity
-        implements ExpandableListView.OnGroupClickListener {
-    NavigationView navigationView;
+        implements ExpandableListView.OnGroupClickListener,
+                   ExpandableListView.OnChildClickListener,
+                   ExpandableListView.OnGroupExpandListener {
+    ExpandableListView expandableListView;
     TabLayout tabLayout;
     ViewPager viewPager;
     FloatingActionButton fab;
     DrawerLayout drawer;
     Window window;
+    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    DatabaseReference eventsDataReference;
+    DatabaseReference societyReference;
+    DatabaseReference schoolReference;
+    long selectedGroupID;
+    ArrayList<EventsInformation> events;
+    ArrayList<Society> societies=new ArrayList();
+    ArrayList<School> schools=new ArrayList();
+    ArrayList<String> menuNames=new ArrayList();
+    NavigationMenuAdapter navMenuAdapter;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainv2);
-//*******************************************************************************Test*****************************************
-        ArrayList<String> menuNames=new ArrayList<>();
-        menuNames.add("Home");
-        menuNames.add("School of Computer Science");
-        menuNames.add("School of Engineering");
-        menuNames.add("School of Buisness");
-        menuNames.add("School of Law");
-        menuNames.add("School of Design");
-        ArrayList<ArrayList<String>> schools=new ArrayList();
-        ArrayList<String> home=new ArrayList<>();
-        ArrayList<String> school1=new ArrayList<>();
-        ArrayList<String> school2=new ArrayList<>();
-        ArrayList<String> school3=new ArrayList<>();
-        ArrayList<String> school4=new ArrayList<>();
-        ArrayList<String> school5=new ArrayList<>();
-        school1.add("ACM");
-        school1.add("CSI");
-        school2.add("SPE");
-        schools.add(home);
-        schools.add(school1);
-        schools.add(school2);
-        schools.add(school3);
-        schools.add(school4);
-        schools.add(school5);
-        NavigationMenuAdapter navMenuAdapter=new NavigationMenuAdapter(this,menuNames,schools);
-        ExpandableListView elv=(ExpandableListView)findViewById(R.id.expandableListView);
-        elv.setAdapter(navMenuAdapter);
-        elv.setOnGroupClickListener(this);
-        if(elv.getSelectedView()!=null)
-        {
-            elv.getSelectedView().setBackgroundColor(Color.RED);
-        }
+//*********************************************** Firebase part **********************************************************
+        System.out.println("Firebase part started\n");
+        eventsDataReference=firebaseDatabase.getReference("EventsDetails");
+        societyReference=firebaseDatabase.getReference("Society");
+        schoolReference=firebaseDatabase.getReference("School");
 
+        eventsDataReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.i("tag","onDataChange() called");
+                System.out.println("ondatachange called");
+                events=new ArrayList<>();
+                for (DataSnapshot q:dataSnapshot.getChildren()) {
+                    Log.i("tag","for loop running");
+                    events.add(q.getValue(EventsInformation.class));
+                }
+                setSchoolData(selectedGroupID,events);
+                Log.i("tag","events size : "+events.size());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        schoolReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                schools=new ArrayList<>();
+                for(DataSnapshot ds:dataSnapshot.getChildren()) {
+                    schools.add(ds.getValue(School.class));
+                }
+                prepareNavigationMenu();
+                navMenuAdapter.setSchools(schools);
+                navMenuAdapter.setMenuNames(menuNames);
+                navMenuAdapter.notifyDataSetChanged();
+                System.out.println("schools size on datachange : "+schools.size());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        societyReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.i("tag","onDataChange for societies called");
+                societies=new ArrayList<Society>();
+                for(DataSnapshot ds:dataSnapshot.getChildren()) {
+                    System.out.println("socities reference datachange for loop running");
+                    societies.add(ds.getValue(Society.class));
+                }
+                prepareNavigationMenu();
+                navMenuAdapter.setSocieties(societies);
+                navMenuAdapter.setMenuNames(menuNames);
+                navMenuAdapter.notifyDataSetChanged();
+                System.out.println("socities size on datachange : "+societies.size());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        System.out.println("adding of listeners complete");
+//***********************************************Firebase part End ************************************************************
+//*******************************************************************************Test*****************************************
+        prepareNavigationMenu();
+        navMenuAdapter=new NavigationMenuAdapter(this,schools,societies,menuNames);
+        expandableListView=(ExpandableListView)findViewById(R.id.expandableListView);
+        expandableListView.setAdapter(navMenuAdapter);
+        expandableListView.setOnGroupClickListener(this);
+        expandableListView.setOnChildClickListener(this);
+
+        //expandableListView.setOnGroupExpandListener(this);
 //**************************************************************************Test******************************************
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         /* Setting the the action bar */
         setSupportActionBar(toolbar);
@@ -137,7 +207,15 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences spref=getSharedPreferences("com.agarwal.ashi.upes_app.choice",Context.MODE_PRIVATE);
         String choice=spref.getString("choice",null);
         System.out.println(choice);
-        setUILayout(choice);
+        setSchoolData(choice,events);
+    }
+
+    private void prepareNavigationMenu() {
+        menuNames=new ArrayList<>();
+        menuNames.add("Home");
+        for(int i=0;i<schools.size();i++) {
+            menuNames.add(schools.get(i).getName());
+        }
     }
 
     @Override
@@ -177,12 +255,50 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
         // Handle ExpandableListView item click events here
-        setUILayout(id);
+        setSchoolData(id,events);
         parent.setSelectedGroup(groupPosition);
         return false; //click was not completely handled;
     }
 
-    private void setUILayout(String desc) {
+    @Override
+    public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+        Log.i("tag","onchildclick");
+        drawer.closeDrawer(Gravity.START);
+        return false;
+    }
+
+
+    @Override
+    public void onGroupExpand(int groupPosition) {
+        Log.i("tag","expand");
+        for(int i=0;i<6;i++) {
+            if(i==groupPosition)
+                highlight((ConstraintLayout)expandableListView.getChildAt(groupPosition),true);
+            //else
+                highlight((ConstraintLayout)expandableListView.getChildAt(i),false);
+        }
+    }
+
+    private void highlight(ConstraintLayout container,boolean highlight) {
+        ImageView icon=(ImageView)container.getChildAt(0);
+        TextView tV=(TextView)container.getChildAt(1);
+        ImageView arrow=(ImageView)container.getChildAt(2);
+        /*ColorStateList foreground;
+        if(highlight){
+            tV.setTextColor(getResources().getColor(R.color.foreground_highlight_color));
+            foreground=ColorStateList.valueOf(getResources().getColor(R.color.foreground_highlight_color));
+            container.setBackgroundColor(getResources().getColor(R.color.highlight_color));
+        }
+        else {
+            tV.setTextColor(getResources().getColor(R.color.highlight_color));
+            foreground=ColorStateList.valueOf(getResources().getColor(R.color.highlight_color));
+            container.setBackgroundColor(getResources().getColor(R.color.foreground_highlight_color));
+        }
+        icon.setImageTintList(foreground);
+        arrow.setImageTintList(foreground);*/
+    }
+
+    private void setSchoolData(String desc,ArrayList<EventsInformation> events) {
         switch(desc) {
             case "home" :
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
@@ -243,18 +359,20 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void setUILayout(long id) {
+    private void setSchoolData(long id,ArrayList<EventsInformation> events) {
+        this.selectedGroupID=id;
         if(id==getResources().getInteger(R.integer.home))
-                setUILayout("home");
+                setSchoolData("home",events);
         else if(id==getResources().getInteger(R.integer.socs))
-                setUILayout("socs");
+                setSchoolData("socs",events);
         else if(id==getResources().getInteger(R.integer.soe))
-                setUILayout("soe");
+                setSchoolData("soe",events);
         else if(id==getResources().getInteger(R.integer.sob))
-                setUILayout("sob");
+                setSchoolData("sob",events);
         else if(id==getResources().getInteger(R.integer.sol))
-                setUILayout("sod");
+                setSchoolData("sod",events);
         else if(id==getResources().getInteger(R.integer.sod))
-                setUILayout("sol");
+                setSchoolData("sol",events);
     }
+
 }

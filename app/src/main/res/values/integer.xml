@@ -6,4 +6,5 @@
     <integer name="sob">3</integer>
     <integer name="sol">4</integer>
     <integer name="sod">5</integer>
+    <integer name="other">6</integer>
 </resources>

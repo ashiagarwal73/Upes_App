@@ -14,8 +14,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
-    int count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,29 +27,6 @@ public class SplashActivity extends AppCompatActivity {
                 if(choice!=null) {
                     Intent i=new Intent(SplashActivity.this,MainActivity.class);
                     i.putExtra("choice",choice);
-
-                    mDatabase.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Counter counter=dataSnapshot.child("Counter").getValue(Counter.class);
-                            count=counter.getCounterid();
-                            Toast.makeText(SplashActivity.this, ""+count, Toast.LENGTH_SHORT).show();
-                            EventsInformation eventsInformation=new EventsInformation();
-                            //Counter counter1=new Counter();
-                            counter.setCounterid(++count);
-                            eventsInformation.setCompetition("aab");
-                            eventsInformation.setContact("ga");
-                            mDatabase.child("Counter").setValue(counter);
-                            mDatabase.child("EventsDetails").child(counter.getCounterid()+"").setValue(eventsInformation);
-                            //Toast.makeText(SplashActivity.this, ""+counter.getCounterid(), Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
                     startActivity(i);
                 }
                 else {
