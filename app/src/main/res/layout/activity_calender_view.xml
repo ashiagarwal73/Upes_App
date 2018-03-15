@@ -4,9 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.agarwal.ashi.upes_app.CalenderView">
-   <CalendarView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
-   </CalendarView>
+    <CalendarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/calenderview">
+    </CalendarView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Events of this Day"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:id="@+id/eventsofthisday"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="#000"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:id="@+id/events"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        />
 </LinearLayout>
