@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -56,7 +57,10 @@ public class EventsAdapter extends BaseAdapter {
         contact.setText(events.get(i).getContact());
         date.setText(events.get(i).getDate());
 
-        Glide.with(fragment).load(events.get(i).getImage()).into(iV);
+        Glide.with(fragment)
+                 .load(events.get(i).getImage())
+                 .apply(new RequestOptions().placeholder(R.drawable.ic_action_picture).error(R.drawable.ic_action_picture))
+                 .into(iV);
 
         return layout;
     }

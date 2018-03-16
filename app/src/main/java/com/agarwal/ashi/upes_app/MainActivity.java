@@ -71,12 +71,14 @@ public class MainActivity extends AppCompatActivity
     ArrayList<School> schools=new ArrayList();
     ArrayList<String> menuNames=new ArrayList();
     NavigationMenuAdapter navMenuAdapter;
+    TextView nodata;
 
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainv2);
+        nodata=(TextView)findViewById(R.id.nodata);
 //*********************************************** Firebase part **********************************************************
         System.out.println("Firebase part started\n");
         eventsDataReference=firebaseDatabase.getReference("EventsDetails");
@@ -95,11 +97,19 @@ public class MainActivity extends AppCompatActivity
                 }
                 setSchoolData(selectedGroupID,getEventsbasedOnSchool(selectedGroupName));
                 Log.i("tag","events size : "+events.size());
+                if(events.size()==0) {
+                    nodata.setText("No Events to Display");
+                    nodata.setTextColor(getResources().getColor(R.color.nodata));
+                    nodata.setVisibility(View.VISIBLE);
+                }
+                else
+                    nodata.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                nodata.setText("No Internet");
+                nodata.setVisibility(View.VISIBLE);
             }
         });
 
@@ -352,7 +362,7 @@ public class MainActivity extends AppCompatActivity
             tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
             pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.colorPrimary, events);
+                    R.color.colorPrimary, this.events);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.colorPrimary);

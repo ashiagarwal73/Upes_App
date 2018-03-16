@@ -20,9 +20,23 @@
         app:tabGravity="center"
         app:tabSelectedTextColor="@color/colorAccent"
         />
-    <android.support.v4.view.ViewPager
+
+    <TextView
+        android:id="@+id/nodata"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/nodata"
+        android:text="NO INTERNET : Nothing To Show"
+        android:textAlignment="center"
+        android:textColor="@color/highlight_color"
+        android:textSize="12sp"
+        android:visibility="visible" />
+
+    <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
 </LinearLayout>

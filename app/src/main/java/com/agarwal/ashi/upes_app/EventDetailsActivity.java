@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 public class EventDetailsActivity extends AppCompatActivity {
@@ -52,7 +53,10 @@ public class EventDetailsActivity extends AppCompatActivity {
         description.setText(event.getEventDescription());
 
         imageView=findViewById(R.id.imageView2);
-        Glide.with(this).load(event.getImage()).into(imageView);
+        Glide.with(this)
+             .load(event.getImage())
+             .apply(new RequestOptions().placeholder(R.drawable.ic_action_picture).error(R.drawable.ic_action_picture))
+             .into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
