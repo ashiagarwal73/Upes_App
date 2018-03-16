@@ -38,10 +38,10 @@
         app:layout_constraintEnd_toStartOf="@+id/sol"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soce" />
+        app:layout_constraintTop_toBottomOf="@+id/socs" />
 
     <Button
-        android:id="@+id/soce"
+        android:id="@+id/socs"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="4dp"
@@ -50,7 +50,7 @@
         android:layout_marginTop="8dp"
         android:background="@color/socs"
         android:onClick="onCilck"
-        android:text="@string/soce"
+        android:text="@string/socs"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/sob"
         app:layout_constraintEnd_toStartOf="@+id/soe"
@@ -73,7 +73,7 @@
         app:layout_constraintBottom_toTopOf="@+id/sol"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/soce"
+        app:layout_constraintStart_toEndOf="@+id/socs"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button

@@ -24,20 +24,20 @@ public class SchoolSelectActivity extends AppCompatActivity {
         String choice;
         Button clickedB=(Button)view;
         switch(clickedB.getId()) {
-            case  R.id.soce :
-                choice="socs";
+            case  R.id.socs :
+                choice=getResources().getString(R.string.socs);
                 break;
             case R.id.soe :
-                choice="soe";
+                choice=getResources().getString(R.string.soe);
                 break;
             case R.id.sob :
-                choice="sob";
+                choice=getResources().getString(R.string.sob);
                 break;
             case R.id.sol :
-                choice="sol";
+                choice=getResources().getString(R.string.sol);
                 break;
             case R.id.sod :
-                choice="sod";
+                choice=getResources().getString(R.string.sod);
                 break;
             default :
                 choice=null;

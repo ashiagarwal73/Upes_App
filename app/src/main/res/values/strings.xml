@@ -8,11 +8,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="soce">School of\nComputer Science</string>
-    <string name="soe">School of\nEngineering</string>
-    <string name="sob">School of\nBuisness</string>
-    <string name="sol">School of\nLaw</string>
-    <string name="sod">School of\nDesigning</string>
+    <string name="home">Home</string>
+    <string name="socs">School of Computer Science</string>
+    <string name="soe">School of Engineering</string>
+    <string name="sob">School of Business</string>
+    <string name="sol">School of Law</string>
+    <string name="sod">School of Designing</string>
     <string name="register">Register</string>
     <string name="contact">Contact</string>
 </resources>
