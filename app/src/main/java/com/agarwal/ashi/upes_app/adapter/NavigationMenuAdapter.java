@@ -1,4 +1,4 @@
-package com.agarwal.ashi.upes_app;
+package com.agarwal.ashi.upes_app.adapter;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.agarwal.ashi.upes_app.R;
+import com.agarwal.ashi.upes_app.pojo.School;
+import com.agarwal.ashi.upes_app.pojo.Society;
+
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 /**
  * Created by 500060150 on 10-03-2018.
@@ -23,7 +25,7 @@ public class NavigationMenuAdapter extends BaseExpandableListAdapter {
     ArrayList<School> schools;
     ArrayList<Society> societies;
     ArrayList<ArrayList<Society>> schoolSocieties;
-    NavigationMenuAdapter(Context context,ArrayList<School> schools,ArrayList<Society> societies,ArrayList<String> menuNames){
+    public NavigationMenuAdapter(Context context,ArrayList<School> schools,ArrayList<Society> societies,ArrayList<String> menuNames){
         this.context=context;
         this.schools=schools;
         this.societies=societies;

@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ExpandableListView;
 import android.widget.ListView;
 
-import java.lang.reflect.Array;
+import com.agarwal.ashi.upes_app.activity.EventDetailsActivity;
+import com.agarwal.ashi.upes_app.adapter.EventsAdapter;
+import com.agarwal.ashi.upes_app.pojo.EventsInformation;
+
 import java.util.ArrayList;
 
 public class EventsFragment extends Fragment {

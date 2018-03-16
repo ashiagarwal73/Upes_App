@@ -1,4 +1,4 @@
-package com.agarwal.ashi.upes_app;
+package com.agarwal.ashi.upes_app.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -55,5 +55,4 @@
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_action_expand" />
-
         </android.support.constraint.ConstraintLayout>

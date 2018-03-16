@@ -1,12 +1,13 @@
-package com.agarwal.ashi.upes_app;
+package com.agarwal.ashi.upes_app.adapter;
 
-import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.agarwal.ashi.upes_app.R;
+import com.agarwal.ashi.upes_app.pojo.EventsInformation;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public class EventsAdapter extends BaseAdapter {
     List<EventsInformation> events;
     LayoutInflater inflater;
-    EventsAdapter(List<EventsInformation> eventList,LayoutInflater inflater) {
+    public EventsAdapter(List<EventsInformation> eventList, LayoutInflater inflater) {
         this.inflater=inflater;
         this.events=eventList;
     }
