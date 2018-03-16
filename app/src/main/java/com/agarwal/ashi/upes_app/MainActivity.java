@@ -73,25 +73,16 @@ public class MainActivity extends AppCompatActivity
     ArrayList<School> schools=new ArrayList();
     ArrayList<String> menuNames=new ArrayList();
     NavigationMenuAdapter navMenuAdapter;
-    TextView nodata;
+    TextView noconnection;
 
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainv2);
-        nodata=(TextView)findViewById(R.id.nodata);
-        nodata.setText("Something");
-        ConnectivityManager cm =
-                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        noconnection=(TextView)findViewById(R.id.noconnection);
+        noconnection.setText("Something");
 
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
-        if(!isConnected) {
-            nodata.setText("Oops! No Internet Connection");
-            nodata.setVisibility(View.VISIBLE);
-        }
 //*********************************************** Firebase part **********************************************************
         System.out.println("Firebase part started\n");
         eventsDataReference=firebaseDatabase.getReference("EventsDetails");
@@ -110,6 +101,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 displayEvents(selectedGroupID,getEventsbasedOnSchool(selectedGroupName));
                 Log.i("tag","events size : "+events.size());
+                noconnection.setVisibility(View.GONE);
             }
 
             @Override
@@ -228,14 +220,20 @@ public class MainActivity extends AppCompatActivity
         displayEvents(choice,getEventsbasedOnSchool(choice));
         selectedGroupID=findGroupId(choice);
     }
-    private void setDataAvailabilityStatus(boolean available) {
-        if(!available) {
-            nodata.setTextColor(getResources().getColor(R.color.nodata));
-            nodata.setText("No Data to Display");
-            nodata.setVisibility(View.VISIBLE);
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ConnectivityManager cm =
+                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if(!isConnected) {
+            noconnection.setText(getResources().getString(R.string.noconnection));
+            noconnection.setVisibility(View.VISIBLE);
         }
-        else
-            nodata.setVisibility(View.GONE);
     }
 
     private long findGroupId(String groupName) {
@@ -369,10 +367,6 @@ public class MainActivity extends AppCompatActivity
 
     private void displayEvents(String schoolName,ArrayList<EventsInformation> evtodisplay) {
         this.selectedGroupName=schoolName;
-        if(evtodisplay.size()==0 && schoolName!=getResources().getString(R.string.home))
-            setDataAvailabilityStatus(false);
-        else
-            setDataAvailabilityStatus(true);
         com.agarwal.ashi.upes_app.PagerAdapter pagerAdapter;
         if(schoolName.equalsIgnoreCase(getResources().getString(R.string.home))) {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
@@ -382,11 +376,6 @@ public class MainActivity extends AppCompatActivity
                     R.color.colorPrimary, events);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
-
-            if(events.size()==0)
-                setDataAvailabilityStatus(false);
-            else
-                setDataAvailabilityStatus(true);
             System.out.println(R.color.colorPrimary);
         }
         else if(schoolName.equalsIgnoreCase(getResources().getString(R.string.socs))) {

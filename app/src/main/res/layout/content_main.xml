@@ -21,11 +21,10 @@
         />
 
     <TextView
-        android:id="@+id/nodata"
+        android:id="@+id/noconnection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/nodata_bg"
-        android:text="TextView"
         android:textAlignment="center"
         android:textColor="@color/highlight_color"
         android:visibility="gone" />
