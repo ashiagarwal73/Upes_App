@@ -41,6 +41,8 @@
             android:divider="@android:color/transparent"
             android:dividerHeight="10dp"
             android:groupIndicator="@null"
+            android:choiceMode="singleChoice"
+            android:childDivider="#00000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

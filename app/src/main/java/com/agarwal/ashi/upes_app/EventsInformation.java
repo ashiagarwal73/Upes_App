@@ -1,10 +1,86 @@
 package com.agarwal.ashi.upes_app;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Ashi on 15-03-2018.
  */
 
-public class EventsInformation {
+public class EventsInformation implements Parcelable{
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+
+        @Override
+        public Object createFromParcel(Parcel parcel) {
+            return new EventsInformation(parcel);
+        }
+
+        @Override
+        public Object[] newArray(int i) {
+            return new EventsInformation[i];
+        }
+    };
+    String eventName;
+    String image;
+    String eventDescription;
+    String date;
+    String organiser;
+    String contact;
+    String school;
+    String workshop;
+    String seminar;
+    String competition;
+    String cultural;
+    String sports;
+    String webminar;
+    String society;
+
+    EventsInformation(){
+        //default contructor}
+    }
+
+    EventsInformation(Parcel parcel) {
+        this.eventName=parcel.readString();
+        this.image=parcel.readString();
+        this.eventDescription=parcel.readString();
+        this.date=parcel.readString();
+        this.organiser=parcel.readString();
+        this.contact=parcel.readString();
+        this.school=parcel.readString();
+        this.workshop=parcel.readString();
+        this.seminar=parcel.readString();
+        this.competition=parcel.readString();
+        this.cultural=parcel.readString();
+        this.sports=parcel.readString();
+        this.webminar=parcel.readString();
+        this.society=parcel.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(eventName);
+        parcel.writeString(image);
+        parcel.writeString(eventDescription);
+        parcel.writeString(date);
+        parcel.writeString(organiser);
+        parcel.writeString(contact);
+        parcel.writeString(school);
+        parcel.writeString(workshop);
+        parcel.writeString(seminar);
+        parcel.writeString(competition);
+        parcel.writeString(cultural);
+        parcel.writeString(sports);
+        parcel.writeString(webminar);
+        parcel.writeString(society);
+
+    }
+
+    //Getter and Setter Methods
     public String getEventName() {
         return eventName;
     }
@@ -117,18 +193,5 @@ public class EventsInformation {
         this.society = society;
     }
 
-    String eventName;
-    String image;
-    String eventDescription;
-    String date;
-    String organiser;
-    String contact;
-    String school;
-    String workshop;
-    String seminar;
-    String competition;
-    String cultural;
-    String sports;
-    String webminar;
-    String society;
+
 }

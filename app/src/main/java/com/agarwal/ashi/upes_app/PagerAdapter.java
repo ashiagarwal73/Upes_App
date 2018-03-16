@@ -1,17 +1,23 @@
 package com.agarwal.ashi.upes_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int tabCount;
     private int layoutColorId;
-    public PagerAdapter(FragmentManager fm, int tabCount,int layoutColorId) {
+    ArrayList<EventsInformation> events;
+    public PagerAdapter(FragmentManager fm, int tabCount, int layoutColorId, ArrayList<EventsInformation> events) {
         super(fm);
         this.tabCount = tabCount;
         this.layoutColorId=layoutColorId;
+        this.events=events;
     }
 
     @Override
@@ -19,32 +25,67 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         EventsFragment eventsFragment=new EventsFragment();
         Bundle args=new Bundle();
         args.putInt("layoutColorId",layoutColorId);
-        eventsFragment.setArguments(args);
-        switch (position){
-            case 0 :
-                //add the intitializer arguments for the fragments here
-                //by args.___________ methods
-                return eventsFragment;
-//              EventsFragment eventsFragment = new EventsFragment();
-//              return eventsFragment;
-            case 1:
-                return eventsFragment;
-//                SocietyFragment societyFragment = new SocietyFragment();
-//                return societyFragment;
-            case 2:
-                return eventsFragment;
-            case 3:
-                return eventsFragment;
-            case 4:
-                return eventsFragment;
-            case 5:;
-                return eventsFragment;
-            case 6:
-                return eventsFragment;
-            default:
-                return null;
-        }
+        ArrayList<EventsInformation> selectedEvt=new ArrayList<>();
+        for(int i=0;i<events.size();i++){
+            EventsInformation temp=events.get(i);
+            String tempstr;
+            switch(position) {
+                case 0 :
+                    tempstr=temp.getWorkshop();
+                    if(tempstr!=null) {
+                        if (tempstr.equalsIgnoreCase("yes"))
+                            selectedEvt.add(temp);
+                    }
+                    break;
 
+                case 1 :
+                    tempstr=temp.getSeminar();
+                    if(tempstr!=null) {
+                        if (tempstr.equalsIgnoreCase("yes"))
+                            selectedEvt.add(temp);
+                    }
+                    break;
+
+                case 2 :
+                    tempstr=temp.getCompetition();
+                    if(tempstr!=null) {
+                        if (tempstr.equalsIgnoreCase("yes"))
+                            selectedEvt.add(temp);
+                    }
+                    break;
+
+                case 3 :
+                    tempstr=temp.getCultural();
+                    if(tempstr!=null) {
+                        if (tempstr.equalsIgnoreCase("yes"))
+                            selectedEvt.add(temp);
+                    }
+                    break;
+
+                case 4 :
+                    tempstr=temp.getSports();
+                    if(tempstr!=null) {
+                        if (tempstr.equalsIgnoreCase("yes"))
+                            selectedEvt.add(temp);
+                    }
+                    break;
+
+                case 5 :
+                    tempstr=temp.getWebminar();
+                    if(tempstr!=null) {
+                        if (tempstr.equalsIgnoreCase("yes"))
+                            selectedEvt.add(temp);
+                    }
+                    break;
+
+                default :
+                    break;
+            }
+        }
+        args.putParcelableArrayList("events",selectedEvt);
+        Log.i("PagerAdapter","selected Events in Pager adapter : "+selectedEvt.size());
+        eventsFragment.setArguments(args);
+        return eventsFragment;
     }
 
     @Override
