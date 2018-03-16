@@ -10,19 +10,21 @@ import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class EventsFragment extends Fragment {
     private int layoutColorId;
+    private ArrayList<EventsInformation> events=new ArrayList<>();
     ListView lV;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Bundle args=getArguments();
         layoutColorId=args.getInt("layoutColorId");
+        events=args.getParcelableArrayList("events");
         lV=(ListView)inflater.inflate(R.layout.fragment_design,container,false);
-        ArrayList<EventsInformation> eventsList=new ArrayList<EventsInformation>();
         //add events here
-        lV.setAdapter(new EventsAdapter(eventsList,inflater));
+        lV.setAdapter(new EventsAdapter(events,inflater));
         System.out.println("Setting on item click listener");
         lV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

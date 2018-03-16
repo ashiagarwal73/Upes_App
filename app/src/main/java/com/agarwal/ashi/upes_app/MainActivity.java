@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
     DatabaseReference societyReference;
     DatabaseReference schoolReference;
     long selectedGroupID;
-    ArrayList<EventsInformation> events;
+    ArrayList<EventsInformation> events=new ArrayList();
     ArrayList<Society> societies=new ArrayList();
     ArrayList<School> schools=new ArrayList();
     ArrayList<String> menuNames=new ArrayList();
@@ -261,9 +261,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+    public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int i1, long l) {
         Log.i("tag","onchildclick");
+        ConstraintLayout container=(ConstraintLayout)view;
+        TextView tV=(TextView)container.getChildAt(0);
+        String societyName=(String)tV.getText();
+        Log.i("tag","onChildClick : "+tV.getText());
         drawer.closeDrawer(Gravity.START);
+        ArrayList<EventsInformation> evtodisplay=new ArrayList();
+        for(int i=0;i<events.size();i++) {
+            EventsInformation temp=events.get(i);
+            if(societyName.equalsIgnoreCase(temp.getSociety())) {
+                evtodisplay.add(temp);
+                Log.i("tag","events : "+temp.getEventName());
+            }
+        }
+        setSchoolData(selectedGroupID,evtodisplay);
         return false;
     }
 
@@ -299,13 +312,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setSchoolData(String desc,ArrayList<EventsInformation> events) {
+        com.agarwal.ashi.upes_app.PagerAdapter pagerAdapter;
         switch(desc) {
             case "home" :
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
                 tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
-                                     R.color.colorPrimary));
+                pagerAdapter=new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                        R.color.colorPrimary,events);
+                viewPager.setAdapter(pagerAdapter);
+                pagerAdapter.notifyDataSetChanged();
                 System.out.println(R.color.colorPrimary);
                 break;
 
@@ -313,8 +329,10 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.socs)));
                 tabLayout.setBackgroundColor(getResources().getColor(R.color.socs));
                 window.setStatusBarColor(getResources().getColor(R.color.soce_dark));
-                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
-                        R.color.socs));
+                pagerAdapter=new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                        R.color.socs,events);
+                viewPager.setAdapter(pagerAdapter);
+                pagerAdapter.notifyDataSetChanged();
                 System.out.println(R.color.socs);
                 break;
 
@@ -322,8 +340,10 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soe)));
                 tabLayout.setBackgroundColor(getResources().getColor(R.color.soe));
                 window.setStatusBarColor(getResources().getColor(R.color.soe_dark));
-                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
-                        R.color.soe));
+                pagerAdapter=new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                        R.color.soe,events);
+                viewPager.setAdapter(pagerAdapter);
+                pagerAdapter.notifyDataSetChanged();
                 System.out.println(R.color.soe);
                 break;
 
@@ -331,8 +351,10 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sob)));
                 tabLayout.setBackgroundColor(getResources().getColor(R.color.sob));
                 window.setStatusBarColor(getResources().getColor(R.color.sob_dark));
-                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
-                        R.color.sob));
+                pagerAdapter=new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                        R.color.sob,events);
+                viewPager.setAdapter(pagerAdapter);
+                pagerAdapter.notifyDataSetChanged();
                 System.out.println(R.color.sob);
                 break;
 
@@ -340,8 +362,10 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sod)));
                 tabLayout.setBackgroundColor(getResources().getColor(R.color.sod));
                 window.setStatusBarColor(getResources().getColor(R.color.sod_dark));
-                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
-                        R.color.sod));
+                pagerAdapter=new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                        R.color.sod,events);
+                viewPager.setAdapter(pagerAdapter);
+                pagerAdapter.notifyDataSetChanged();
                 System.out.println(R.color.sod);
                 break;
 
@@ -349,8 +373,10 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sol)));
                 tabLayout.setBackgroundColor(getResources().getColor(R.color.sol));
                 window.setStatusBarColor(getResources().getColor(R.color.sol_dark));
-                viewPager.setAdapter(new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
-                        R.color.sol));
+                pagerAdapter=new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),
+                        R.color.sol,events);
+                viewPager.setAdapter(pagerAdapter);
+                pagerAdapter.notifyDataSetChanged();
                 System.out.println(R.color.sol);
                 break;
 
