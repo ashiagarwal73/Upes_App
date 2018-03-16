@@ -17,6 +17,7 @@ public class EventsFragment extends Fragment {
     private int layoutColorId;
     private ArrayList<EventsInformation> events=new ArrayList<>();
     ListView lV;
+    EventsAdapter eventsAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Bundle args=getArguments();
@@ -24,14 +25,17 @@ public class EventsFragment extends Fragment {
         events=args.getParcelableArrayList("events");
         lV=(ListView)inflater.inflate(R.layout.fragment_design,container,false);
         //add events here
-        lV.setAdapter(new EventsAdapter(events,inflater));
+        eventsAdapter=new EventsAdapter(events,inflater,this);
+        lV.setAdapter(eventsAdapter);
         System.out.println("Setting on item click listener");
         lV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 System.out.println("onItemClickListener");
+                EventsInformation event=(EventsInformation)eventsAdapter.getItem(i);
                 Intent intent=new Intent(getActivity(),EventDetailsActivity.class);
                 intent.putExtra("actionbarColorId",layoutColorId);
+                intent.putExtra("event",event);
                 getActivity().startActivity(intent);
             }
         });
