@@ -26,7 +26,7 @@ public class EventsAdapter extends BaseAdapter {
     private List<EventsInformation> events;
     private LayoutInflater inflater;
     private Fragment fragment;
-    EventsAdapter(List<EventsInformation> events, LayoutInflater inflater, Fragment fragment) {
+    public EventsAdapter(List<EventsInformation> events, LayoutInflater inflater, Fragment fragment) {
         this.inflater=inflater;
         this.events=events;
         this.fragment=fragment;
