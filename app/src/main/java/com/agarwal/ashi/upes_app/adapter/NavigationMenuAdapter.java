@@ -62,8 +62,11 @@ public class NavigationMenuAdapter extends BaseExpandableListAdapter {
         for(int i=0;i<schools.size();i++) {
             ArrayList<Society> temp = new ArrayList<>();
             for(int j=0;j<societies.size();j++) {
-                if (societies.get(j).getSchool().equalsIgnoreCase(schools.get(i).getName())) {
-                    temp.add(societies.get(j));
+                String schoolName=societies.get(j).getSchool();
+                if(schoolName!=null) {
+                    if (schoolName.equalsIgnoreCase(schools.get(i).getName())) {
+                        temp.add(societies.get(j));
+                    }
                 }
             }
             schoolSocieties.add(temp);
