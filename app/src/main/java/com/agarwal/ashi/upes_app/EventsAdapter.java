@@ -53,7 +53,7 @@ public class EventsAdapter extends BaseAdapter {
         ImageView iV=(ImageView)layout.findViewById(R.id.event_icon);
 
         titleView.setText(events.get(i).getEventName());
-        organizer.setText(events.get(i).getOrganiser());
+        organizer.setText("Organizer : "+events.get(i).getOrganiser());
         contact.setText(events.get(i).getContact());
         date.setText(events.get(i).getDate());
 
