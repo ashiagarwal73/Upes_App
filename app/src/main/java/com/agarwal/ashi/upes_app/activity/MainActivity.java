@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -62,12 +65,16 @@ public class MainActivity extends AppCompatActivity
     ArrayList<School> schools=new ArrayList();
     ArrayList<String> menuNames=new ArrayList();
     NavigationMenuAdapter navMenuAdapter;
+    TextView noconnection;
 
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainv2);
+        noconnection=(TextView)findViewById(R.id.noconnection);
+        noconnection.setText("Something");
+
 //*********************************************** Firebase part **********************************************************
         System.out.println("Firebase part started\n");
         eventsDataReference=firebaseDatabase.getReference("EventsDetails");
@@ -84,13 +91,13 @@ public class MainActivity extends AppCompatActivity
                     Log.i("tag","for loop running");
                     events.add(q.getValue(EventsInformation.class));
                 }
-                setSchoolData(selectedGroupID,getEventsbasedOnSchool(selectedGroupName));
+                displayEvents(selectedGroupID,getEventsbasedOnSchool(selectedGroupName));
                 Log.i("tag","events size : "+events.size());
+                noconnection.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -202,8 +209,23 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences spref=getSharedPreferences("com.agarwal.ashi.upes_app.choice",Context.MODE_PRIVATE);
         String choice=spref.getString("choice",null);
         System.out.println(choice);
-        setSchoolData(choice,getEventsbasedOnSchool(choice));
+        displayEvents(choice,getEventsbasedOnSchool(choice));
         selectedGroupID=findGroupId(choice);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ConnectivityManager cm =
+                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if(!isConnected) {
+            noconnection.setText(getResources().getString(R.string.noconnection));
+            noconnection.setVisibility(View.VISIBLE);
+        }
     }
 
     private long findGroupId(String groupName) {
@@ -285,7 +307,7 @@ public class MainActivity extends AppCompatActivity
         // Handle ExpandableListView item click events here
         ConstraintLayout container=(ConstraintLayout)v;
         TextView tV=(TextView)container.getChildAt(1);
-        setSchoolData(id,getEventsbasedOnSchool((String)tV.getText()));
+        displayEvents(id,getEventsbasedOnSchool((String)tV.getText()));
         parent.setSelectedGroup(groupPosition);
         ViewGroup vg=(ViewGroup)v;
         if(navMenuAdapter.getChildrenCount(groupPosition)==0)
@@ -300,7 +322,7 @@ public class MainActivity extends AppCompatActivity
         TextView tV=(TextView)container.getChildAt(0);
         Log.i("tag","onChildClick : "+tV.getText());
         drawer.closeDrawer(Gravity.START);
-        setSchoolData(selectedGroupID,getEventsbasedOnSociety((String)tV.getText()));
+        displayEvents(selectedGroupID,getEventsbasedOnSociety((String)tV.getText()));
         return false;
     }
 
@@ -328,17 +350,17 @@ public class MainActivity extends AppCompatActivity
 
             if(societyName.equalsIgnoreCase(temp.getSociety())) {
                 evtodisplay.add(temp);
-                Log.i("tag","geteventsbasedonsociety : true "+temp.getEventName());
+                Log.i("tag","getevtodisplaybasedonsociety : true "+temp.getEventName());
             }
         }
         return evtodisplay;
     }
 
 
-    private void setSchoolData(String desc,ArrayList<EventsInformation> events) {
-        this.selectedGroupName=desc;
+    private void displayEvents(String schoolName,ArrayList<EventsInformation> evtodisplay) {
+        this.selectedGroupName=schoolName;
         com.agarwal.ashi.upes_app.PagerAdapter pagerAdapter;
-        if(desc.equalsIgnoreCase(getResources().getString(R.string.home))) {
+        if(schoolName.equalsIgnoreCase(getResources().getString(R.string.home))) {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
             getSupportActionBar().setTitle("Home");
             tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -349,79 +371,80 @@ public class MainActivity extends AppCompatActivity
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.colorPrimary);
         }
-        else if(desc.equalsIgnoreCase(getResources().getString(R.string.socs))) {
+        else if(schoolName.equalsIgnoreCase(getResources().getString(R.string.socs))) {
             getSupportActionBar().setTitle("School of Computer Science");
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.socs)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.socs));
             window.setStatusBarColor(getResources().getColor(R.color.soce_dark));
             pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.socs, events);
+                    R.color.socs, evtodisplay);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.socs);
         }
-        else if(desc.equalsIgnoreCase(getResources().getString(R.string.soe))) {
+        else if(schoolName.equalsIgnoreCase(getResources().getString(R.string.soe))) {
             getSupportActionBar().setTitle("School of Engineering");
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soe)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.soe));
             window.setStatusBarColor(getResources().getColor(R.color.soe_dark));
             pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.soe, events);
+                    R.color.soe, evtodisplay);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.soe);
         }
-        else if(desc.equalsIgnoreCase(getResources().getString(R.string.sob))) {
+        else if(schoolName.equalsIgnoreCase(getResources().getString(R.string.sob))) {
             getSupportActionBar().setTitle("School of Business");
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sob)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sob));
             window.setStatusBarColor(getResources().getColor(R.color.sob_dark));
             pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.sob, events);
+                    R.color.sob, evtodisplay);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.sob);
         }
-        else if(desc.equalsIgnoreCase(getResources().getString(R.string.sod))) {
+        else if(schoolName.equalsIgnoreCase(getResources().getString(R.string.sod))) {
+            getSupportActionBar().setTitle("School of Design");
             getSupportActionBar().setTitle("School of Design");
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sod)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sod));
             window.setStatusBarColor(getResources().getColor(R.color.sod_dark));
             pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.sod, events);
+                    R.color.sod, evtodisplay);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.sod);
         }
-        else if(desc.equalsIgnoreCase(getResources().getString(R.string.sol))) {
+        else if(schoolName.equalsIgnoreCase(getResources().getString(R.string.sol))) {
             getSupportActionBar().setTitle("School of Law");
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sol)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sol));
             window.setStatusBarColor(getResources().getColor(R.color.sol_dark));
             pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.sol, events);
+                    R.color.sol, evtodisplay);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.sol);
         }
         else
-            Log.i("MainActivity","setSchoolData : invalid choice");
+            Log.i("MainActivity","displayEvents : invalid choice");
     }
 
-    private void setSchoolData(long id,ArrayList<EventsInformation> events) {
+    private void displayEvents(long id,ArrayList<EventsInformation> evtodisplay) {
         this.selectedGroupID=id;
         if(id==getResources().getInteger(R.integer.home))
-                setSchoolData(getResources().getString(R.string.home),events);
+                displayEvents(getResources().getString(R.string.home),evtodisplay);
         else if(id==getResources().getInteger(R.integer.socs))
-                setSchoolData(getResources().getString(R.string.socs),events);
+                displayEvents(getResources().getString(R.string.socs),evtodisplay);
         else if(id==getResources().getInteger(R.integer.soe))
-                setSchoolData(getResources().getString(R.string.soe),events);
+                displayEvents(getResources().getString(R.string.soe),evtodisplay);
         else if(id==getResources().getInteger(R.integer.sob))
-                setSchoolData(getResources().getString(R.string.sob),events);
+                displayEvents(getResources().getString(R.string.sob),evtodisplay);
         else if(id==getResources().getInteger(R.integer.sol))
-                setSchoolData(getResources().getString(R.string.sol),events);
+                displayEvents(getResources().getString(R.string.sol),evtodisplay);
         else if(id==getResources().getInteger(R.integer.sod))
-                setSchoolData(getResources().getString(R.string.sod),events);
+                displayEvents(getResources().getString(R.string.sod),evtodisplay);
     }
 
     @Override

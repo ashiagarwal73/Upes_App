@@ -8,7 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.agarwal.ashi.upes_app.pojo.EventsInformation;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.agarwal.ashi.upes_app.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
@@ -18,16 +22,21 @@ public class EventDetailsActivity extends AppCompatActivity {
     private static final String TAG = "DemoActivity";
     Thread myThread;
     ImageView imageView;
+    TextView description;
     Window window;
-
+    private EventsInformation event;
+    private int actionbarColorId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle=getIntent().getExtras();
         setContentView(R.layout.activity_event_details_v2);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        int actionbarColorId=bundle.getInt("actionbarColorId");
+        actionbarColorId=bundle.getInt("actionbarColorId");
+        event=bundle.getParcelable("event");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(actionbarColorId)));
+
+        //obtaining instance of SlidingUpPanelLayout
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         mLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
@@ -41,7 +50,15 @@ public class EventDetailsActivity extends AppCompatActivity {
 
             }
         });
+
+        description=(TextView)findViewById(R.id.description);
+        description.setText(event.getEventDescription());
+
         imageView=findViewById(R.id.imageView2);
+        Glide.with(this)
+             .load(event.getImage())
+             .apply(new RequestOptions().placeholder(R.drawable.ic_action_picture).error(R.drawable.ic_action_picture))
+             .into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

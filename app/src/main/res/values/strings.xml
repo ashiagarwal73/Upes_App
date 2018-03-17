@@ -16,4 +16,6 @@
     <string name="sod">School of Design</string>
     <string name="register">Register</string>
     <string name="contact">Contact</string>
+    <string name="nodata">No data available for this Category</string>
+    <string name="noconnection">Offline</string>
 </resources>
