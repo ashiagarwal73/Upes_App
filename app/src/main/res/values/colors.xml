@@ -15,5 +15,5 @@
     <color name="sod_dark">#860d0d</color>
     <color name="highlight_color">#f70404</color>
     <color name="nodata_bg">#bc434342</color>
-    <color name="nodata">#dedee2</color>
+    <color name="nodata">#ffffff</color>
 </resources>
