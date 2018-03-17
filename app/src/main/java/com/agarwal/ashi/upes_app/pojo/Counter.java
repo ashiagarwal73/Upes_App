@@ -5,13 +5,14 @@ package com.agarwal.ashi.upes_app.pojo;
  */
 
 public class Counter {
-    public int getCounterid() {
-        return counterid;
+    public Counter(){}
+    public int getCounter() {
+        return counter;
     }
 
-    public void setCounterid(int counterid) {
-        this.counterid = counterid;
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 
-    int counterid;
+    int counter;
 }
