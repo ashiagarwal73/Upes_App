@@ -1,10 +1,12 @@
-package com.agarwal.ashi.upes_app;
+package com.agarwal.ashi.upes_app.activity;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.TextView;
+
+import com.agarwal.ashi.upes_app.R;
 
 public class CalenderView extends AppCompatActivity {
     TextView textView,textView2;

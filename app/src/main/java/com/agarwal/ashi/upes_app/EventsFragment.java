@@ -13,7 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
+import com.agarwal.ashi.upes_app.activity.EventDetailsActivity;
+import com.agarwal.ashi.upes_app.adapter.EventsAdapter;
+import com.agarwal.ashi.upes_app.pojo.EventsInformation;
+
 import java.util.ArrayList;
 
 public class EventsFragment extends Fragment {

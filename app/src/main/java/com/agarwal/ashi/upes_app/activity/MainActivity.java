@@ -1,32 +1,23 @@
-package com.agarwal.ashi.upes_app;
+package com.agarwal.ashi.upes_app.activity;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.SubMenu;
 import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -36,20 +27,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.agarwal.ashi.upes_app.adapter.NavigationMenuAdapter;
+import com.agarwal.ashi.upes_app.R;
+import com.agarwal.ashi.upes_app.pojo.EventsInformation;
+import com.agarwal.ashi.upes_app.pojo.School;
+import com.agarwal.ashi.upes_app.pojo.Society;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 public class MainActivity extends AppCompatActivity
         implements ExpandableListView.OnGroupClickListener,
@@ -370,6 +362,7 @@ public class MainActivity extends AppCompatActivity
         com.agarwal.ashi.upes_app.PagerAdapter pagerAdapter;
         if(schoolName.equalsIgnoreCase(getResources().getString(R.string.home))) {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+            getSupportActionBar().setTitle("Home");
             tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
             pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
@@ -379,6 +372,7 @@ public class MainActivity extends AppCompatActivity
             System.out.println(R.color.colorPrimary);
         }
         else if(schoolName.equalsIgnoreCase(getResources().getString(R.string.socs))) {
+            getSupportActionBar().setTitle("School of Computer Science");
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.socs)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.socs));
             window.setStatusBarColor(getResources().getColor(R.color.soce_dark));
@@ -389,6 +383,7 @@ public class MainActivity extends AppCompatActivity
             System.out.println(R.color.socs);
         }
         else if(schoolName.equalsIgnoreCase(getResources().getString(R.string.soe))) {
+            getSupportActionBar().setTitle("School of Engineering");
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soe)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.soe));
             window.setStatusBarColor(getResources().getColor(R.color.soe_dark));
@@ -399,6 +394,7 @@ public class MainActivity extends AppCompatActivity
             System.out.println(R.color.soe);
         }
         else if(schoolName.equalsIgnoreCase(getResources().getString(R.string.sob))) {
+            getSupportActionBar().setTitle("School of Business");
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sob)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sob));
             window.setStatusBarColor(getResources().getColor(R.color.sob_dark));
@@ -409,6 +405,8 @@ public class MainActivity extends AppCompatActivity
             System.out.println(R.color.sob);
         }
         else if(schoolName.equalsIgnoreCase(getResources().getString(R.string.sod))) {
+            getSupportActionBar().setTitle("School of Design");
+            getSupportActionBar().setTitle("School of Design");
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sod)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sod));
             window.setStatusBarColor(getResources().getColor(R.color.sod_dark));
@@ -419,6 +417,7 @@ public class MainActivity extends AppCompatActivity
             System.out.println(R.color.sod);
         }
         else if(schoolName.equalsIgnoreCase(getResources().getString(R.string.sol))) {
+            getSupportActionBar().setTitle("School of Law");
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sol)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sol));
             window.setStatusBarColor(getResources().getColor(R.color.sol_dark));

@@ -1,4 +1,4 @@
-package com.agarwal.ashi.upes_app;
+package com.agarwal.ashi.upes_app.pojo;
 
 /**
  * Created by Ashi on 15-03-2018.

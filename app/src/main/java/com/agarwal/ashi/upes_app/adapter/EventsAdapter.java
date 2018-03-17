@@ -1,4 +1,4 @@
-package com.agarwal.ashi.upes_app;
+package com.agarwal.ashi.upes_app.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+
+import com.agarwal.ashi.upes_app.R;
+import com.agarwal.ashi.upes_app.pojo.EventsInformation;
 
 import java.util.List;
 

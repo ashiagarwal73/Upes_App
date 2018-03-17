@@ -1,4 +1,4 @@
-package com.agarwal.ashi.upes_app;
+package com.agarwal.ashi.upes_app.activity;
 
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +10,10 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.agarwal.ashi.upes_app.pojo.EventsInformation;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.agarwal.ashi.upes_app.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 public class EventDetailsActivity extends AppCompatActivity {
