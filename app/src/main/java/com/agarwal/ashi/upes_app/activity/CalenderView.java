@@ -58,7 +58,7 @@ public class CalenderView extends AppCompatActivity {
                                 datef=Integer.parseInt(output[0]);
                                 monthf=Integer.parseInt(output[1]);
                                 yearf=Integer.parseInt(output[2]);
-                                if(year==yearf&&month==monthf&&dayOfMonth==datef) {
+                                if(year==yearf&&month==monthf-1&&dayOfMonth==datef) {
                                     textView.setVisibility(View.VISIBLE);
                                     textView2.setVisibility(View.VISIBLE);
                                     textView2.setText(events.get(i).getEventName());

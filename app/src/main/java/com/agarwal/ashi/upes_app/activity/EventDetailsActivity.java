@@ -1,6 +1,9 @@
 package com.agarwal.ashi.upes_app.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.media.session.PlaybackState;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,13 +11,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.agarwal.ashi.upes_app.adapter.CustomAdapter;
+import com.agarwal.ashi.upes_app.adapter.NavigationMenuAdapter;
 import com.agarwal.ashi.upes_app.pojo.EventsInformation;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.agarwal.ashi.upes_app.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import java.util.ArrayList;
 
 public class EventDetailsActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -22,7 +30,8 @@ public class EventDetailsActivity extends AppCompatActivity {
     private static final String TAG = "DemoActivity";
     Thread myThread;
     ImageView imageView;
-    TextView description;
+    ListView list;
+    TextView description,time,venue;
     Window window;
     private EventsInformation event;
     private int actionbarColorId;
@@ -36,7 +45,19 @@ public class EventDetailsActivity extends AppCompatActivity {
         actionbarColorId=bundle.getInt("actionbarColorId");
         event=bundle.getParcelable("event");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(actionbarColorId)));
-
+        list=findViewById(R.id.list);
+        /*description=(TextView)findViewById(R.id.description);
+        time=findViewById(R.id.time);
+        venue=findViewById(R.id.venue);
+        description.setText(event.getEventDescription());
+        time.setText("Time of Event"+event.getTime());
+        venue.setText("Venue of Event"+event.getVenue());*/
+        String[] arrayList=new String[3];
+        arrayList[0]=("Description\n"+event.getEventDescription());
+        arrayList[1]=("Time of Event:  "+event.getTime());
+        arrayList[2]=("Venue of Event:  "+event.getVenue());
+        CustomAdapter customAdapter=new CustomAdapter(EventDetailsActivity.this,arrayList);
+        list.setAdapter(customAdapter);
         //obtaining instance of SlidingUpPanelLayout
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         mLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
@@ -51,10 +72,6 @@ public class EventDetailsActivity extends AppCompatActivity {
 
             }
         });
-
-        description=(TextView)findViewById(R.id.description);
-        description.setText(event.getEventDescription());
-
         imageView=findViewById(R.id.imageView2);
         Glide.with(this)
              .load(event.getImage())
@@ -94,5 +111,11 @@ public class EventDetailsActivity extends AppCompatActivity {
 //        myThread.start();
         mLayout.setAnchorPoint(.6f);
         mLayout.setPanelHeight(100);
+    }
+    public void onContactClick(View v)
+    {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:"+event.getContact()));
+        startActivity(intent);
     }
 }
