@@ -38,7 +38,11 @@ public class EventsInformation implements Parcelable{
     String venue;
     String eventid;
     String loginid;
-    EventsInformation(Parcel parcel) {
+    public EventsInformation()
+    {
+        //default constructor
+    }
+    public EventsInformation(Parcel parcel) {
         this.eventName=parcel.readString();
         this.image=parcel.readString();
         this.eventDescription=parcel.readString();
