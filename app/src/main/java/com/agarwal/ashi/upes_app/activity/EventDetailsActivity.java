@@ -26,6 +26,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     Window window;
     private EventsInformation event;
     private int actionbarColorId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

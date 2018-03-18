@@ -38,6 +38,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.agarwal.ashi.upes_app.ConnectionBroadCastReceiver;
+import com.agarwal.ashi.upes_app.activity.services.NotificationService;
 import com.agarwal.ashi.upes_app.adapter.NavigationMenuAdapter;
 import com.agarwal.ashi.upes_app.R;
 import com.agarwal.ashi.upes_app.pojo.Counter;
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity
                    ExpandableListView.OnChildClickListener,
                    ExpandableListView.OnGroupExpandListener,
                    ExpandableListView.OnGroupCollapseListener{
-    private static final String CHANNEL1_ID="CHANNEL 1";
     ExpandableListView expandableListView;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -85,7 +85,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainv2);
-        createNotificationChannel(CHANNEL1_ID);
+
+        Intent serviceIntent=new Intent(this,NotificationService.class);
+        serviceIntent.putExtra("counter",counter.getCounter());
+        startService(serviceIntent);
 
         IntentFilter filter=new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         cbcr=new ConnectionBroadCastReceiver();
@@ -112,9 +115,6 @@ public class MainActivity extends AppCompatActivity
                 }
                 displayEvents(selectedGroupID,getEventsbasedOnSchool(selectedGroupName));
                 Log.i("tag","events size : "+events.size());
-                //noconnection.setVisibility(View.GONE);
-                if(events.size()-counter.getCounter()==1)
-                    notifyForNewEvent(events.get(events.size()-1),1);
                 counter.setCounter(events.size());
                 progressBar.setVisibility(View.GONE);
                 viewPager.setVisibility(View.VISIBLE);
@@ -495,17 +495,6 @@ public class MainActivity extends AppCompatActivity
         Log.i("tag","ongroupexpand called"); */
     }
 
-    private void createNotificationChannel(String channelId) {
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O) {
-            String name=channelId;
-            String desc="Channel "+name;
-            int importance= NotificationManagerCompat.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(channelId, name,importance);
-            NotificationManager notificationManager = (NotificationManager) getSystemService(
-                    NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
     private int getSchoolColorId(String schoolName) {
         int actionbarColorId=0;
         if(schoolName.equalsIgnoreCase(getString(R.string.home)))
@@ -523,27 +512,6 @@ public class MainActivity extends AppCompatActivity
         return actionbarColorId;
     }
 
-    private void notifyForNewEvent(EventsInformation event,int notificationId) {
-        Intent notifyIntent = new Intent(this, EventDetailsActivity.class);
-        notifyIntent.putExtra("event",event);
-        notifyIntent.putExtra("actionbarColorId",getSchoolColorId(event.getSchool()));
-        notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent notifyPendingIntent = PendingIntent.getActivity(
-                this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
-        );
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL1_ID)
-                .setSmallIcon(R.drawable.ic_school_black_24dp)
-                .setContentTitle(event.getEventName())
-                .setContentText(event.getSociety()+" has posted a new event")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(notifyPendingIntent)
-                .setAutoCancel(true);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(notificationId, builder.build());
-    }
 
     @Override
     public void onDestroy() {
