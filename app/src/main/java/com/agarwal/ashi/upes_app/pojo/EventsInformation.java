@@ -34,11 +34,10 @@ public class EventsInformation implements Parcelable{
     String sports;
     String webminar;
     String society;
-
-    EventsInformation(){
-        //default contructor}
-    }
-
+    String time;
+    String venue;
+    String eventid;
+    String loginid;
     EventsInformation(Parcel parcel) {
         this.eventName=parcel.readString();
         this.image=parcel.readString();
@@ -54,6 +53,10 @@ public class EventsInformation implements Parcelable{
         this.sports=parcel.readString();
         this.webminar=parcel.readString();
         this.society=parcel.readString();
+        this.loginid=parcel.readString();
+        this.eventid=parcel.readString();
+        this.time=parcel.readString();
+        this.venue=parcel.readString();
     }
 
     @Override
@@ -77,6 +80,10 @@ public class EventsInformation implements Parcelable{
         parcel.writeString(sports);
         parcel.writeString(webminar);
         parcel.writeString(society);
+        parcel.writeString(eventid);
+        parcel.writeString(loginid);
+        parcel.writeString(time);
+        parcel.writeString(venue);
 
     }
 
@@ -192,6 +199,40 @@ public class EventsInformation implements Parcelable{
     public void setSociety(String society) {
         this.society = society;
     }
+    public String getTime() {
+        return time;
+    }
 
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
+
+
+    public String getEventid() {
+        return eventid;
+    }
+
+    public void setEventid(String eventid) {
+        this.eventid = eventid;
+    }
+
+
+
+    public String getLoginid() {
+        return loginid;
+    }
+
+    public void setLoginid(String loginid) {
+        this.loginid = loginid;
+    }
 
 }
