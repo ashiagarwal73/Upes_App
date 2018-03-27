@@ -200,20 +200,6 @@ public class MainActivity extends AppCompatActivity
 
         /* setting the tab layout with the view pager */
         tabLayout.setupWithViewPager(viewPager);
-
-
-
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
-
         /*Setting the overflow icon as calender icon */
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_date_range_black_24dp);
         toolbar.setOverflowIcon(drawable);

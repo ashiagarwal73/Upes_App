@@ -29,7 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="6dp"
-
             android:text="Slide Up to view more details "
             android:textAlignment="center"
             android:textColor="#000"
@@ -38,11 +37,11 @@
         <ListView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="150dp"
             android:textSize="18sp"
             android:textColor="#000"
             android:padding="10dp"
-            android:layout_weight="1">
+            >
         </ListView>
         <!--<TextView
             android:layout_width="match_parent"

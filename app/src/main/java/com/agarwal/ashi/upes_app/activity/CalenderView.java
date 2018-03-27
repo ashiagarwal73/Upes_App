@@ -51,7 +51,7 @@ public class CalenderView extends AppCompatActivity {
                         events=new ArrayList<>();
                         for (DataSnapshot q:dataSnapshot.getChildren()) {
                             Log.i("tag","for loop running");
-                            events.add(q.getValue(EventsInformation.class));
+                            events.add(q.getValue(EventsInformation.class));}
                             for(int i=0;i<events.size();i++) {
                                 s=events.get(i).getDate();
                                 output=s.split("/"); //dikkat kaha hai ?WAI SOCH RHI HUARRAY INITIALISE KAHA KRI
@@ -62,17 +62,28 @@ public class CalenderView extends AppCompatActivity {
                                     textView.setVisibility(View.VISIBLE);
                                     textView2.setVisibility(View.VISIBLE);
                                     textView2.setText(events.get(i).getEventName());
-                                    break;
+                                    for(int j=i;j<events.size();j++) {
+                                        s=events.get(j).getDate();
+                                        output=s.split("/"); //dikkat kaha hai ?WAI SOCH RHI HUARRAY INITIALISE KAHA KRI
+                                        datef=Integer.parseInt(output[0]);
+                                        monthf=Integer.parseInt(output[1]);
+                                        yearf=Integer.parseInt(output[2]);
+                                        if(year==yearf&&month==monthf-1&&dayOfMonth==datef) {
+                                            if(i!=j)
+                                            {
+                                            textView2.setText(textView2.getText().toString()+"\n"+events.get(j).getEventName());
+                                            }
+                                        }
+                                    }
+                                            break;
                                 }
                                 else {
                                     textView.setVisibility(View.INVISIBLE);
                                     textView2.setVisibility(View.INVISIBLE);
                                 }
 
-                            }
-//
-// ******************test
-//                    events.get(0).getDate();
+
+
                         }
                     }
 
