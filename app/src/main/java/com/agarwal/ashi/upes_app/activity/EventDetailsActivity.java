@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.agarwal.ashi.upes_app.adapter.CustomAdapter;
 import com.agarwal.ashi.upes_app.adapter.NavigationMenuAdapter;
 import com.agarwal.ashi.upes_app.pojo.EventsInformation;
+import com.agarwal.ashi.upes_app.pojo.LayoutInformation;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.agarwal.ashi.upes_app.R;
@@ -34,7 +35,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     TextView description,time,venue;
     Window window;
     private EventsInformation event;
-    private int actionbarColorId;
+    private LayoutInformation layoutInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +43,11 @@ public class EventDetailsActivity extends AppCompatActivity {
         Bundle bundle=getIntent().getExtras();
         setContentView(R.layout.activity_event_details_v2);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        actionbarColorId=bundle.getInt("actionbarColorId");
+        layoutInformation=bundle.getParcelable("layoutinformation");
         event=bundle.getParcelable("event");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(actionbarColorId)));
+        window=getWindow();
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(layoutInformation.getLayoutColorLight())));
+        window.setStatusBarColor(getResources().getColor(layoutInformation.getLayoutColorDark()));
         list=findViewById(R.id.list);
         /*description=(TextView)findViewById(R.id.description);
         time=findViewById(R.id.time);

@@ -30,7 +30,7 @@
             android:taskAffinity=""
             android:theme="@style/AppTheme"></activity>
         <activity
-            android:name=".activity.CalenderView"
+            android:name=".activity.CalenderActivity"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme"></activity>
 

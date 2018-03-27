@@ -70,7 +70,7 @@ public class NotificationService extends Service implements ValueEventListener {
         Log.i("tag","events size : "+events.size());
         //noconnection.setVisibility(View.GONE);
         if(events.size()-counter.getCounter()==1)
-            notifyForNewEvent(events.get(events.size()-1),1);
+            notifyForNewEvent(events.get(0),1);
         counter.setCounter(events.size());
     }
 

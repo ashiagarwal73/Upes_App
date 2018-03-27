@@ -134,14 +134,14 @@ public class NavigationMenuAdapter extends BaseExpandableListAdapter {
         else {
             groupHeader=(ConstraintLayout) convertView;
         }
-        iV=(ImageView)groupHeader.getChildAt(0);
-        tV=(TextView)groupHeader.getChildAt(1);
+        iV=(ImageView)groupHeader.findViewById(R.id.icon_view);
+        tV=(TextView)groupHeader.findViewById(R.id.child_name);
         tV.setText(menuNames.get(groupPosition));
         if(groupPosition==0)
             iV.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_home_black_24dp,null));
         else
             iV.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_school_black_24dp));
-        arrow = (ImageView) groupHeader.getChildAt(2);
+        arrow = (ImageView) groupHeader.findViewById(R.id.arrow);
         if(getChildrenCount(groupPosition)!=0) {
             arrow.setVisibility(View.VISIBLE);
         }
@@ -161,7 +161,7 @@ public class NavigationMenuAdapter extends BaseExpandableListAdapter {
         else {
             groupItem=(ConstraintLayout) convertView;
         }
-        tV=(TextView)groupItem.getChildAt(0);
+        tV=(TextView)groupItem.findViewById(R.id.child_name);
         tV.setText(schoolSocieties.get(groupPosition-1).get(childPosition).getSocietyName());
         return groupItem;
     }
