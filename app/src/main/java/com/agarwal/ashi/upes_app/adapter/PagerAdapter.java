@@ -1,4 +1,4 @@
-package com.agarwal.ashi.upes_app;
+package com.agarwal.ashi.upes_app.adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,7 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
+import com.agarwal.ashi.upes_app.EventsFragment;
 import com.agarwal.ashi.upes_app.pojo.EventsInformation;
+import com.agarwal.ashi.upes_app.pojo.LayoutInformation;
 
 import java.util.ArrayList;
 
@@ -14,18 +16,20 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     int tabCount;
     private int layoutColorId;
     ArrayList<EventsInformation> events;
-    public PagerAdapter(FragmentManager fm, int tabCount, int layoutColorId, ArrayList<EventsInformation> events) {
+    LayoutInformation layoutInformation;
+    public PagerAdapter(FragmentManager fm, int tabCount, LayoutInformation layoutInformation, ArrayList<EventsInformation> events) {
         super(fm);
         this.tabCount = tabCount;
         this.layoutColorId=layoutColorId;
         this.events=events;
+        this.layoutInformation=layoutInformation;
     }
 
     @Override
     public Fragment getItem(int position) {
         EventsFragment eventsFragment=new EventsFragment();
         Bundle args=new Bundle();
-        args.putInt("layoutColorId",layoutColorId);
+        args.putParcelable("layoutinformation",layoutInformation);
         ArrayList<EventsInformation> selectedEvt=new ArrayList<>();
         for(int i=0;i<events.size();i++){
             EventsInformation temp=events.get(i);

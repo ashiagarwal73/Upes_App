@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class CalenderView extends AppCompatActivity {
+public class CalenderActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     DatabaseReference eventsDataReference;
     ArrayList<EventsInformation> events=new ArrayList();
@@ -80,7 +80,7 @@ public class CalenderView extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
-                //Toast.makeText(CalenderView.this, ""+dayOfMonth+" "+month+" "+year, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CalenderActivity.this, ""+dayOfMonth+" "+month+" "+year, Toast.LENGTH_SHORT).show();
             }
         });
     }

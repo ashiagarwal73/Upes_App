@@ -26,4 +26,5 @@
         <!-- Background color when SELECTED -->
         <item name="colorControlHighlight">@color/colorPrimary</item>
     </style>
+    <style name="AppTheme.CardView" parent="Theme.AppCompat.Light"></style>
 </resources>
