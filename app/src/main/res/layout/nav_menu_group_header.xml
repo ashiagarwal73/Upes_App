@@ -9,7 +9,7 @@
         android:background="@drawable/selected_group">
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/icon_view"
                 android:layout_width="24dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
@@ -17,32 +17,31 @@
                 android:layout_marginTop="8dp"
                 android:tint="#c90b0b"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView2"
+                app:layout_constraintEnd_toStartOf="@+id/child_name"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_home_black_24dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/child_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="cursive"
         android:text="Text View"
         android:textColor="#c90909"
-        android:textSize="20sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+        app:layout_constraintEnd_toStartOf="@+id/arrow"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintStart_toEndOf="@+id/icon_view"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/arrow"
         android:layout_width="18dp"
         android:layout_height="19dp"
         android:layout_marginBottom="8dp"
@@ -53,7 +52,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/child_name"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_action_expand" />
         </android.support.constraint.ConstraintLayout>

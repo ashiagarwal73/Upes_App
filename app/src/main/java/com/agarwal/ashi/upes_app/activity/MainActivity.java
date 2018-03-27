@@ -43,6 +43,7 @@ import com.agarwal.ashi.upes_app.adapter.NavigationMenuAdapter;
 import com.agarwal.ashi.upes_app.R;
 import com.agarwal.ashi.upes_app.pojo.Counter;
 import com.agarwal.ashi.upes_app.pojo.EventsInformation;
+import com.agarwal.ashi.upes_app.pojo.LayoutInformation;
 import com.agarwal.ashi.upes_app.pojo.School;
 import com.agarwal.ashi.upes_app.pojo.Society;
 import com.google.android.gms.measurement.AppMeasurement;
@@ -298,7 +299,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_calenderview) {
-            Intent intent=new Intent(MainActivity.this,CalenderView.class);
+            Intent intent=new Intent(MainActivity.this,CalenderActivity.class);
             startActivity(intent);
             return true;
         }
@@ -365,14 +366,14 @@ public class MainActivity extends AppCompatActivity
 
     private void displayEvents(String schoolName,ArrayList<EventsInformation> evtodisplay) {
         this.selectedGroupName=schoolName;
-        com.agarwal.ashi.upes_app.PagerAdapter pagerAdapter;
+        PagerAdapter pagerAdapter;
         if(schoolName.equalsIgnoreCase(getString(R.string.home))) {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
             getSupportActionBar().setTitle("Home");
             tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-            pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.colorPrimary, events);
+            pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
+                    new LayoutInformation(R.color.colorPrimary,R.color.colorPrimaryDark), events);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.colorPrimary);
@@ -382,8 +383,8 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.socs)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.socs));
             window.setStatusBarColor(getResources().getColor(R.color.soce_dark));
-            pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.socs, evtodisplay);
+            pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
+                    new LayoutInformation(R.color.socs,R.color.soce_dark), evtodisplay);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.socs);
@@ -393,8 +394,8 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.soe)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.soe));
             window.setStatusBarColor(getResources().getColor(R.color.soe_dark));
-            pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.soe, evtodisplay);
+            pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
+                    new LayoutInformation(R.color.soe,R.color.soe_dark), evtodisplay);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.soe);
@@ -404,8 +405,8 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sob)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sob));
             window.setStatusBarColor(getResources().getColor(R.color.sob_dark));
-            pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.sob, evtodisplay);
+            pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
+                    new LayoutInformation(R.color.sob,R.color.sob_dark), evtodisplay);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.sob);
@@ -416,8 +417,8 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sod)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sod));
             window.setStatusBarColor(getResources().getColor(R.color.sod_dark));
-            pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.sod, evtodisplay);
+            pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
+                    new LayoutInformation(R.color.sod,R.color.sod_dark), evtodisplay);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.sod);
@@ -427,8 +428,8 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.sol)));
             tabLayout.setBackgroundColor(getResources().getColor(R.color.sol));
             window.setStatusBarColor(getResources().getColor(R.color.sol_dark));
-            pagerAdapter = new com.agarwal.ashi.upes_app.PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
-                    R.color.sol, evtodisplay);
+            pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(),
+                    new LayoutInformation(R.color.sol,R.color.sol_dark), evtodisplay);
             viewPager.setAdapter(pagerAdapter);
             pagerAdapter.notifyDataSetChanged();
             System.out.println(R.color.sol);

@@ -1,4 +1,4 @@
-package com.agarwal.ashi.upes_app.adapter;
+package com.agarwal.ashi.upes_app.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
