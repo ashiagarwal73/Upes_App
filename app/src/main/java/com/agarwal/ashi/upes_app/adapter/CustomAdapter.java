@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.agarwal.ashi.upes_app.R;
 
-import java.util.ArrayList;
-
 /**
  * Created by Ashi on 18-03-2018.
  */
@@ -44,7 +42,7 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView=layoutInflater.inflate(R.layout.customadapter,null);
-        TextView textView=convertView.findViewById(R.id.textView2);
+        TextView textView=convertView.findViewById(R.id.child_name);
         textView.setText(arrayList[position]);
         return convertView;
     }

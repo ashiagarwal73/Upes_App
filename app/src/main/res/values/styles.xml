@@ -24,4 +24,5 @@
         <!-- Color of text and icon when SELECTED -->
         <!-- Background color when SELECTED -->
     </style>
+    <style name="AppTheme.CardView" parent="Theme.AppCompat.Light"></style>
 </resources>

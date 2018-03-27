@@ -8,7 +8,7 @@
      android:orientation="vertical">
 
      <TextView
-         android:id="@+id/textView6"
+         android:id="@+id/data_status"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:background="@color/nodata_bg"
@@ -18,9 +18,12 @@
          android:visibility="visible" />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:dividerHeight="5dp"
+        android:divider="@null"
+        android:padding="5dp"/>
 
 </LinearLayout>
 
