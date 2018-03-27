@@ -70,7 +70,7 @@ public class NotificationService extends Service implements ValueEventListener {
         Log.i("tag","events size : "+events.size());
         //noconnection.setVisibility(View.GONE);
         if(events.size()-counter.getCounter()==1)
-            notifyForNewEvent(events.get(events.size()-1),1);
+            notifyForNewEvent(events.get(0),1);
         counter.setCounter(events.size());
     }
 
@@ -83,7 +83,7 @@ public class NotificationService extends Service implements ValueEventListener {
             String name=channelId;
             String desc="Channel "+name;
             int importance= NotificationManagerCompat.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(channelId, name,importance);
+            NotificationChannel channel = new NotificationChannel(channelId, name,NotificationManager.IMPORTANCE_HIGH);
             NotificationManager notificationManager = (NotificationManager) getSystemService(
                     NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(channel);
