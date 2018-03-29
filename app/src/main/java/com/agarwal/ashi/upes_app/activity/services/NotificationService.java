@@ -18,6 +18,7 @@ import com.agarwal.ashi.upes_app.R;
 import com.agarwal.ashi.upes_app.activity.EventDetailsActivity;
 import com.agarwal.ashi.upes_app.pojo.Counter;
 import com.agarwal.ashi.upes_app.pojo.EventsInformation;
+import com.agarwal.ashi.upes_app.pojo.LayoutInformation;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -106,10 +107,29 @@ public class NotificationService extends Service implements ValueEventListener {
         return actionbarColorId;
     }
 
+    private int getSchoolColorDarkId(String schoolName) {
+        int actionbarColorId=0;
+        if(schoolName.equalsIgnoreCase(getString(R.string.home)))
+            actionbarColorId=R.color.colorPrimaryDark;
+        else if(schoolName.equalsIgnoreCase(getString(R.string.socs)))
+            actionbarColorId=R.color.soce_dark;
+        else if(schoolName.equalsIgnoreCase(getString(R.string.soe)))
+            actionbarColorId=R.color.soe_dark;
+        else if(schoolName.equalsIgnoreCase(getString(R.string.sob)))
+            actionbarColorId=R.color.sob_dark;
+        else if(schoolName.equalsIgnoreCase(getString(R.string.sol)))
+            actionbarColorId=R.color.sol_dark;
+        else if(schoolName.equalsIgnoreCase(getString(R.string.sod)))
+            actionbarColorId=R.color.sod_dark;
+        return actionbarColorId;
+    }
+
     private void notifyForNewEvent(EventsInformation event,int notificationId) {
         Intent notifyIntent = new Intent(this, EventDetailsActivity.class);
         notifyIntent.putExtra("event",event);
-        notifyIntent.putExtra("actionbarColorId",getSchoolColorId(event.getSchool()));
+        notifyIntent.putExtra("layoutinformation",new LayoutInformation(getSchoolColorId(event.getSchool()),
+                                                             getSchoolColorDarkId(event.getSchool())));
+
         notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent notifyPendingIntent = PendingIntent.getActivity(
