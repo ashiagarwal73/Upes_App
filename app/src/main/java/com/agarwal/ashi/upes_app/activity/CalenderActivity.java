@@ -39,6 +39,9 @@ public class CalenderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender_view);
+        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
         textView=findViewById(R.id.eventsofthisday);
         textView2=findViewById(R.id.events);
         CalendarView calendarView=findViewById(R.id.calenderview);

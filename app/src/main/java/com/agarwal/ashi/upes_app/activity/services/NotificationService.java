@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -37,6 +39,7 @@ public class NotificationService extends Service implements ValueEventListener {
     Counter counter;
     FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     DatabaseReference rootReference;
+    Uri soundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
@@ -45,7 +48,7 @@ public class NotificationService extends Service implements ValueEventListener {
 
     @Override
     public int onStartCommand(Intent intent,int flags,int startID) {
-        rootReference=firebaseDatabase.getReference();
+        rootReference=firebaseDatabase.getReference().child("EventsDetails");
         counter=new Counter();
         handler=new Handler();
         runnable=new Runnable() {
@@ -64,7 +67,7 @@ public class NotificationService extends Service implements ValueEventListener {
         Log.i("tag","onDataChange() called");
         System.out.println("ondatachange called");
         ArrayList<EventsInformation> events=new ArrayList<>();
-        for (DataSnapshot q:dataSnapshot.child("EventsDetails").getChildren()) {
+        for (DataSnapshot q:dataSnapshot.getChildren()) {
             Log.i("tag","for loop running");
             events.add(q.getValue(EventsInformation.class));
         }
@@ -143,6 +146,7 @@ public class NotificationService extends Service implements ValueEventListener {
                 .setContentText(event.getSociety()+" has posted a new event")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(notifyPendingIntent)
+                .setSound(soundUri)
                 .setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
