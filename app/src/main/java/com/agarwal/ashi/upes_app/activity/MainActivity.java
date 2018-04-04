@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity
         rootReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                progressBar.setVisibility(View.VISIBLE);
+                viewPager.setVisibility(View.INVISIBLE);
                 Log.i("tag","onDataChange() called");
                 System.out.println("ondatachange called");
                 events=new ArrayList<>();
@@ -120,8 +122,6 @@ public class MainActivity extends AppCompatActivity
         schoolReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                progressBar.setVisibility(View.VISIBLE);
-                viewPager.setVisibility(View.INVISIBLE);
                 schools=new ArrayList<>();
                 for(DataSnapshot ds:dataSnapshot.getChildren()) {
                     schools.add(ds.getValue(School.class));
@@ -131,8 +131,6 @@ public class MainActivity extends AppCompatActivity
                 navMenuAdapter.setMenuNames(menuNames);
                 navMenuAdapter.notifyDataSetChanged();
                 System.out.println("schools size on datachange : "+schools.size());
-                progressBar.setVisibility(View.GONE);
-                viewPager.setVisibility(View.VISIBLE);
             }
 
             @Override
