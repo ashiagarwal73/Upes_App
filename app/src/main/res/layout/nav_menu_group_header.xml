@@ -33,7 +33,7 @@
         android:fontFamily="sans-serif-condensed"
         android:text="Text View"
         android:textColor="@drawable/drawer_item"
-        android:textSize="10sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/arrow"
