@@ -1,8 +1,5 @@
 package com.agarwal.ashi.upes_app.activity;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,15 +7,10 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -41,12 +33,12 @@ import com.agarwal.ashi.upes_app.ConnectionBroadCastReceiver;
 import com.agarwal.ashi.upes_app.activity.services.NotificationService;
 import com.agarwal.ashi.upes_app.adapter.NavigationMenuAdapter;
 import com.agarwal.ashi.upes_app.R;
+import com.agarwal.ashi.upes_app.adapter.PagerAdapter;
 import com.agarwal.ashi.upes_app.pojo.Counter;
 import com.agarwal.ashi.upes_app.pojo.EventsInformation;
 import com.agarwal.ashi.upes_app.pojo.LayoutInformation;
 import com.agarwal.ashi.upes_app.pojo.School;
 import com.agarwal.ashi.upes_app.pojo.Society;
-import com.google.android.gms.measurement.AppMeasurement;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -106,6 +98,8 @@ public class MainActivity extends AppCompatActivity
         rootReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                progressBar.setVisibility(View.VISIBLE);
+                viewPager.setVisibility(View.INVISIBLE);
                 Log.i("tag","onDataChange() called");
                 System.out.println("ondatachange called");
                 events=new ArrayList<>();
@@ -128,8 +122,6 @@ public class MainActivity extends AppCompatActivity
         schoolReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                progressBar.setVisibility(View.VISIBLE);
-                viewPager.setVisibility(View.INVISIBLE);
                 schools=new ArrayList<>();
                 for(DataSnapshot ds:dataSnapshot.getChildren()) {
                     schools.add(ds.getValue(School.class));
@@ -139,8 +131,6 @@ public class MainActivity extends AppCompatActivity
                 navMenuAdapter.setMenuNames(menuNames);
                 navMenuAdapter.notifyDataSetChanged();
                 System.out.println("schools size on datachange : "+schools.size());
-                progressBar.setVisibility(View.GONE);
-                viewPager.setVisibility(View.VISIBLE);
             }
 
             @Override
