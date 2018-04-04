@@ -80,7 +80,7 @@ public class CalenderActivity extends AppCompatActivity {
                                     if(Y==yearf&&M==monthf&&D==datef) {
                                         if(i!=j)
                                         {
-                                            textView2.setText(textView2.getText().toString()+"\n"+events.get(j).getEventName());
+                                            textView2.setText(textView2.getText().toString()+"\n\n"+events.get(j).getEventName());
                                         }
                                     }
                                 }
@@ -128,7 +128,7 @@ public class CalenderActivity extends AppCompatActivity {
                                         if(year==yearf&&month==monthf-1&&dayOfMonth==datef) {
                                             if(i!=j)
                                             {
-                                            textView2.setText(textView2.getText().toString()+"\n"+events.get(j).getEventName());
+                                            textView2.setText(textView2.getText().toString()+"\n\n"+events.get(j).getEventName());
                                             }
                                         }
                                     }

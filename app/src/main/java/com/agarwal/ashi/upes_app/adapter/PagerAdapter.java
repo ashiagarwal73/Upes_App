@@ -1,4 +1,4 @@
-package com.agarwal.ashi.upes_app.activity;
+package com.agarwal.ashi.upes_app.adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -36,7 +36,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             String tempstr;
             switch(position) {
                 case 0 :
-                    tempstr=temp.getWorkshop();
+                    tempstr=temp.getCompetition();
                     if(tempstr!=null) {
                         if (tempstr.equalsIgnoreCase("yes"))
                             selectedEvt.add(temp);
@@ -44,15 +44,16 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                     break;
 
                 case 1 :
-                    tempstr=temp.getSeminar();
+                    tempstr=temp.getWorkshop();
                     if(tempstr!=null) {
                         if (tempstr.equalsIgnoreCase("yes"))
                             selectedEvt.add(temp);
                     }
                     break;
 
+
                 case 2 :
-                    tempstr=temp.getCompetition();
+                    tempstr=temp.getSeminar();
                     if(tempstr!=null) {
                         if (tempstr.equalsIgnoreCase("yes"))
                             selectedEvt.add(temp);
@@ -104,5 +105,5 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     }
     //String[] tabText = new String[]{"School of Computer Science","School of Engineering","School of EventsFragment","School of Law","School of Business"};
     //String[] tabText = new String[]{"SOCS","SOE","SOD","SOL","SOB"};
-    String[] tabText=new String[]{"Workshops","Seminars","Competitions","Cultural","Sports","Webminars"};
+    String[] tabText=new String[]{"Competitions","Workshops","Seminars","Cultural","Sports","Webminars"};
 }

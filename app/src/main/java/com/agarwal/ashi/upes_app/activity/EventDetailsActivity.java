@@ -59,7 +59,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         time.setText("Time of Event"+event.getTime());
         venue.setText("Venue of Event"+event.getVenue());*/
         String[] arrayList=new String[3];
-        arrayList[0]=("Description\n"+event.getEventDescription());
+        arrayList[0]=(event.getEventDescription());
         arrayList[1]=("Time of Event:  "+event.getTime());
         arrayList[2]=("Venue of Event:  "+event.getVenue());
         CustomAdapter customAdapter=new CustomAdapter(EventDetailsActivity.this,arrayList);
@@ -81,7 +81,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         });
         imageView=findViewById(R.id.imageView2);
         textView=findViewById(R.id.contactnumber);
-        textView.setText("Contact :"+event.getContact());
+        textView.setText("Contact : "+event.getContact());
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
