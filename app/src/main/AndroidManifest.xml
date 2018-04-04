@@ -28,16 +28,19 @@
             android:launchMode="singleTask"
             android:parentActivityName=".activity.MainActivity"
             android:taskAffinity=""
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme">
+        </activity>
         <activity
             android:name=".activity.CalenderActivity"
             android:parentActivityName=".activity.MainActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme">
+        </activity>
 
         <service
             android:name=".activity.services.NotificationService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>
