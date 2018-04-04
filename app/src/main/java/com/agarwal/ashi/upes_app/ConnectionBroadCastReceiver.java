@@ -24,9 +24,9 @@ public class ConnectionBroadCastReceiver extends BroadcastReceiver {
                 && activeNetwork.isConnectedOrConnecting();
         Log.i("tag","inside on Receive of Broadcast Receiver");
         if(!isConnected) {
-            ((MainActivity)context).setConnectivityStatus(false);
+            ((MainActivity)context).onConnectivityStatusChanged(false);
         }
         else
-            ((MainActivity)context).setConnectivityStatus(true);
+            ((MainActivity)context).onConnectivityStatusChanged(true);
     }
 }

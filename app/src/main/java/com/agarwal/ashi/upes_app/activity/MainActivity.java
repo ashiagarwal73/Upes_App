@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity
 
         noconnection=(TextView)findViewById(R.id.noconnection);
         progressBar=(ProgressBar)findViewById(R.id.prgressbar2);
-        progressBar.setVisibility(View.VISIBLE);
 //*********************************************** Firebase part **********************************************************
         System.out.println("Firebase part started\n");
         rootReference=firebaseDatabase.getReference();
@@ -129,6 +128,8 @@ public class MainActivity extends AppCompatActivity
         schoolReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                progressBar.setVisibility(View.VISIBLE);
+                viewPager.setVisibility(View.INVISIBLE);
                 schools=new ArrayList<>();
                 for(DataSnapshot ds:dataSnapshot.getChildren()) {
                     schools.add(ds.getValue(School.class));
@@ -138,6 +139,8 @@ public class MainActivity extends AppCompatActivity
                 navMenuAdapter.setMenuNames(menuNames);
                 navMenuAdapter.notifyDataSetChanged();
                 System.out.println("schools size on datachange : "+schools.size());
+                progressBar.setVisibility(View.GONE);
+                viewPager.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -224,13 +227,14 @@ public class MainActivity extends AppCompatActivity
         selectedGroupID=findGroupId(choice);
     }
 
-    public void setConnectivityStatus(boolean isConnected) {
+    public void onConnectivityStatusChanged(boolean isConnected) {
         if(!isConnected) {
             noconnection.setText(getString(R.string.noconnection));
             noconnection.setVisibility(View.VISIBLE);
         }
-        else
+        else {
             noconnection.setVisibility(View.GONE);
+        }
     }
 
     private long findGroupId(String groupName) {
