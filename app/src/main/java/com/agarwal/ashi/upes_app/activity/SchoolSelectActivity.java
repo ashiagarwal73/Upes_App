@@ -41,6 +41,9 @@ public class SchoolSelectActivity extends AppCompatActivity {
             case R.id.sod :
                 choice=getResources().getString(R.string.sod);
                 break;
+            case R.id.button7:
+                choice=getString(R.string.home);
+                break;
             default :
                 choice=null;
                 break;

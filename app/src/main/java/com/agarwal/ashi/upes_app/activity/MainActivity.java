@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity
             return getResources().getInteger(R.integer.sob);
         else if(groupName.equalsIgnoreCase(getString(R.string.sol)))
             return getResources().getInteger(R.integer.sol);
-        else if(groupName.equalsIgnoreCase(getString(R.string.home)))
+        else if(groupName.equalsIgnoreCase(getString(R.string.sod)))
             return getResources().getInteger(R.integer.sod);
         else
             return -1;
