@@ -30,7 +30,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.agarwal.ashi.upes_app.ConnectionBroadCastReceiver;
-import com.agarwal.ashi.upes_app.activity.services.NotificationService;
+import com.agarwal.ashi.upes_app.services.NotificationService;
 import com.agarwal.ashi.upes_app.adapter.NavigationMenuAdapter;
 import com.agarwal.ashi.upes_app.R;
 import com.agarwal.ashi.upes_app.adapter.PagerAdapter;

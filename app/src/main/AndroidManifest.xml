@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MainActivity"
+            android:launchMode="singleTop"/>
         <activity android:name=".activity.SchoolSelectActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
@@ -37,7 +38,7 @@
         </activity>
 
         <service
-            android:name=".activity.services.NotificationService"
+            android:name=".services.NotificationService"
             android:enabled="true"
             android:exported="true">
         </service>
