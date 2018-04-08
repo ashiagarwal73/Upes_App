@@ -41,6 +41,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     private LayoutInformation layoutInformation;
     Button button;
     TextView textView;
+    TextView slideuptextview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +55,10 @@ public class EventDetailsActivity extends AppCompatActivity {
         window.setStatusBarColor(getResources().getColor(layoutInformation.getLayoutColorDark()));
         list=findViewById(R.id.list);
         button=findViewById(R.id.contact);
-        /*description=(TextView)findViewById(R.id.description);
-        time=findViewById(R.id.time);
-        venue=findViewById(R.id.venue);
-        description.setText(event.getEventDescription());
-        time.setText("Time of Event"+event.getTime());
-        venue.setText("Venue of Event"+event.getVenue());*/
+
+        slideuptextview =(TextView)findViewById(R.id.slideuptextview);
+        slideuptextview.setTextColor(getResources().getColor(layoutInformation.getLayoutColorLight()));
+
         String[] arrayList=new String[3];
         arrayList[0]=(event.getEventDescription());
         arrayList[1]=("Time of Event:  "+event.getTime());
@@ -81,9 +80,11 @@ public class EventDetailsActivity extends AppCompatActivity {
 
             }
         });
+
         imageView=findViewById(R.id.imageView2);
         textView=findViewById(R.id.contactnumber);
         textView.setText("Contact : "+event.getContact());
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +94,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
             }
         });
+
         Glide.with(this)
              .load(event.getImage())
              .apply(new RequestOptions().placeholder(R.drawable.ic_action_picture).error(R.drawable.ic_action_picture))
@@ -103,6 +105,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
             }
         });
+
         mLayout.setFadeOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,26 +113,6 @@ public class EventDetailsActivity extends AppCompatActivity {
 
             }
         });
-        /*myThread = new Thread()
-        {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    sleep(500);
-                    mLayout.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
-
-                }
-                catch(Exception ex)
-                {
-                    ex.printStackTrace();
-                }
-
-            }
-        };*/
-//        myThread.start();
-
 
         mLayout.setAnchorPoint(.6f);
         mLayout.setPanelHeight(70);

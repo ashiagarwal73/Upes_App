@@ -24,16 +24,17 @@
         android:clickable="true"
         android:focusable="false"
         android:id="@+id/dragView">
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                android:text="Slide Up to view more details "
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/slideuptextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:text="Slide Up to view more details "
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:textStyle="bold" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

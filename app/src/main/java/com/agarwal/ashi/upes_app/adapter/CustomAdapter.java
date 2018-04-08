@@ -22,7 +22,6 @@ public class CustomAdapter extends BaseAdapter {
         this.context=context;
         this.arrayList=arrayList;
         layoutInflater=(LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-
     }
     @Override
     public int getCount() {
