@@ -54,6 +54,7 @@ public class EventsAdapter extends BaseAdapter {
         TextView contact=(TextView)layout.findViewById(R.id.contact);
         TextView date=(TextView)layout.findViewById(R.id.date);
         ImageView iV=(ImageView)layout.findViewById(R.id.event_icon);
+        TextView expired=(TextView)layout.findViewById(R.id.expired);
 
         titleView.setText(events.get(i).getEventName());
         organizer.setText("Organizer : "+events.get(i).getOrganiser());
@@ -64,6 +65,9 @@ public class EventsAdapter extends BaseAdapter {
                  .load(events.get(i).getImage())
                  .apply(new RequestOptions().placeholder(R.drawable.ic_action_picture).error(R.drawable.ic_action_picture))
                  .into(iV);
+
+        if(((EventsInformation)getItem(i)).isExpired())
+            expired.setVisibility(View.VISIBLE);
 
         return layout;
     }

@@ -30,7 +30,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.agarwal.ashi.upes_app.ConnectionBroadCastReceiver;
-import com.agarwal.ashi.upes_app.activity.services.NotificationService;
+import com.agarwal.ashi.upes_app.services.NotificationService;
 import com.agarwal.ashi.upes_app.adapter.NavigationMenuAdapter;
 import com.agarwal.ashi.upes_app.R;
 import com.agarwal.ashi.upes_app.adapter.PagerAdapter;
@@ -45,7 +45,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity
@@ -103,10 +107,30 @@ public class MainActivity extends AppCompatActivity
                 Log.i("tag","onDataChange() called");
                 System.out.println("ondatachange called");
                 events=new ArrayList<>();
+                ArrayList<EventsInformation> expired=new ArrayList();
+                EventsInformation temp;
+                //getting current date
+                String currentDate=new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+                Log.i("tag",currentDate);
+
+                //************** extracting data *******************************************
                 for (DataSnapshot q:dataSnapshot.child("EventsDetails").getChildren()) {
                     Log.i("tag","for loop running");
-                    events.add(q.getValue(EventsInformation.class));
+                    temp=q.getValue(EventsInformation.class);
+                    if(temp.getDate().compareTo(currentDate)>=0) {
+                        events.add(temp);
+                        Log.i("date", temp.getDate());
+                    }
+                    else {
+                        expired.add(temp);
+                        temp.setExpired(true);
+                    }
                 }
+                Collections.sort(events,null);
+                Collections.sort(expired,null);
+                events.addAll(expired);
+                //*****************************************************************************
+
                 displayEvents(selectedGroupID,getEventsbasedOnSchool(selectedGroupName));
                 Log.i("tag","events size : "+events.size());
                 counter.setCounter(events.size());

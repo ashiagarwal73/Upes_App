@@ -2,12 +2,18 @@ package com.agarwal.ashi.upes_app.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Ashi on 15-03-2018.
  */
 
-public class EventsInformation implements Parcelable{
+public class EventsInformation implements Parcelable,Comparable<EventsInformation>{
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
 
         @Override
@@ -38,6 +44,16 @@ public class EventsInformation implements Parcelable{
     String venue;
     String eventid;
     String loginid;
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+
+    boolean expired;
     public EventsInformation()
     {
         //default constructor
@@ -239,4 +255,8 @@ public class EventsInformation implements Parcelable{
         this.loginid = loginid;
     }
 
+    @Override
+    public int compareTo(@NonNull EventsInformation eInfo) {
+        return getDate().compareTo(eInfo.getDate());
+    }
 }

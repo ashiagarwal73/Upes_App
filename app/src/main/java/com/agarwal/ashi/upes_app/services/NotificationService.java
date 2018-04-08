@@ -1,4 +1,4 @@
-package com.agarwal.ashi.upes_app.activity.services;
+package com.agarwal.ashi.upes_app.services;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -10,11 +10,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.provider.CalendarContract;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
-import android.view.View;
 
 import com.agarwal.ashi.upes_app.R;
 import com.agarwal.ashi.upes_app.activity.EventDetailsActivity;
