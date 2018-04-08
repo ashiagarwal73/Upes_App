@@ -235,10 +235,22 @@ public class MainActivity extends AppCompatActivity
            SchoolSelectActivity
          */
         SharedPreferences spref=getSharedPreferences("com.agarwal.ashi.upes_app.choice",Context.MODE_PRIVATE);
-        String choice=spref.getString("choice",null);
+        String choice;
+        if(savedInstanceState==null)
+            choice=spref.getString("choice",null);
+        else {
+            choice=savedInstanceState.getString("choice");
+        }
         System.out.println(choice);
         displayEvents(choice,getEventsbasedOnSchool(choice));
         selectedGroupID=findGroupId(choice);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outstate) {
+        outstate.putString("choice",selectedGroupName);
+        super.onSaveInstanceState(outstate);
+
     }
 
     public void onConnectivityStatusChanged(boolean isConnected) {

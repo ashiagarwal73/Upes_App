@@ -25,10 +25,7 @@
         </activity>
         <activity
             android:name=".activity.EventDetailsActivity"
-            android:excludeFromRecents="true"
-            android:launchMode="singleTask"
             android:parentActivityName=".activity.MainActivity"
-            android:taskAffinity=""
             android:theme="@style/AppTheme">
         </activity>
         <activity
