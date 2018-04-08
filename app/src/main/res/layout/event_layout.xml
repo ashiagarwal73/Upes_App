@@ -6,22 +6,24 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/cardview_dark_background"
+    android:background="@drawable/cardlayout_bg"
     card_view:cardCornerRadius="10dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/cardlayout_bg">
 
         <TextView
             android:id="@+id/contact"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="13dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="60dp"
-            android:text="contact : 8979588935"
+            android:text="contact : "
             android:textAlignment="textEnd"
+            android:textColor="@android:color/black"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +42,7 @@
             android:paddingLeft="4dp"
             android:text="Organizer"
             android:textAlignment="textStart"
+            android:textColor="@android:color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/contact"
@@ -57,6 +60,7 @@
             android:layout_marginTop="8dp"
             android:text="Date "
             android:textAlignment="textEnd"
+            android:textColor="@android:color/black"
             android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -72,6 +76,7 @@
             android:fontFamily="sans-serif-condensed"
             android:paddingLeft="4dp"
             android:text="Title"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/date"
