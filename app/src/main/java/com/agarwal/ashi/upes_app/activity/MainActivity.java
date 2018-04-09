@@ -82,11 +82,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainv2);
-
+/*
         Intent serviceIntent=new Intent(this,NotificationService.class);
         serviceIntent.putExtra("counter",counter.getCounter());
         startService(serviceIntent);
-
+*/
         IntentFilter filter=new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         cbcr=new ConnectionBroadCastReceiver();
         registerReceiver(cbcr,filter);
