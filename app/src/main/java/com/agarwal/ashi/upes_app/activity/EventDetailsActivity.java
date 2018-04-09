@@ -113,9 +113,27 @@ public class EventDetailsActivity extends AppCompatActivity {
 
             }
         });
+        myThread = new Thread()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    sleep(1000);
+                    mLayout.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
 
+                }
+                catch(Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+
+            }
+        };
+        myThread.start();
         mLayout.setAnchorPoint(.6f);
-        mLayout.setPanelHeight(70);
+        mLayout.setPanelHeight(100);
     }
 
     @Override
